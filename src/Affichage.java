@@ -18,8 +18,9 @@ public class Affichage extends JPanel {
     private int largeurMoto = 60;
     private int hauteurMoto = 46;
     private BufferedImage decor;
+    private BufferedImage route;
     /**Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.*/
-    private final int horizon = HEIGHT / 3 + HEIGHT / 4;
+    private final int horizon = HEIGHT / 3 + HEIGHT / 6;
 
     /**Permet de tester l'affichage dans un premier temps. A remplacer par les attributs de gestions de la moto
      * qui se trouveront dans le modèle.*/
@@ -37,7 +38,8 @@ public class Affichage extends JPanel {
         this.etat = etat;
         addMouseListener(new Control(etat,this)); //Gestion de la souris par la création du controleur
         moto = ImageIO.read(new File("Assets/moto.png"));
-        decor = ImageIO.read(new File("Assets/squeeziemask.png"));
+        decor = ImageIO.read(new File("Assets/ciel-nuageux.png"));
+        route = ImageIO.read(new File("Assets/route.png"));
     }
 
 
@@ -47,7 +49,9 @@ public class Affichage extends JPanel {
     public void paint(Graphics g) {
         super.paint(g); //nettoie la zone d'affichage
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
+        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
         g.drawImage(moto, posMotoX, posMotoY, largeurMoto, hauteurMoto, null);
+
     }
 
 }
