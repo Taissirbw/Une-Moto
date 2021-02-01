@@ -28,6 +28,7 @@ public class Affichage extends JPanel {
     private int posMotoY = HEIGHT - hauteurMoto - 50;
 
 
+
     /**Etat du modèle.*/
     public Etat etat;
 
