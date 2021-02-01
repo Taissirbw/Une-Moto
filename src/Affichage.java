@@ -1,22 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+
 
 /** Classe Affichage : Les éléments a affiché dans la fenetre créée */
 public class Affichage extends JPanel {
 
-    /** Constantes */
-    public static final int WIDTH = 600; //Largeur de la fenetre
-    public static final int HEIGHT = 400; //Hauteur de la fenetre
+    /** Constantes définissant la taille de la fenêtre de jeu*/
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 400;
 
-    public static int x = 200; //Abscisse
-    public static int y = 200; //Ordonné
-    //public static int width = 125; //largeur de l'ovale
-    //public static int height = 90; //hauteur de l'ovale
-    public static final int saut = 40; //taille du saut lors du clic souris
+    /**Tampon pour stocker une image représentant le véhicule.*/
+    private BufferedImage vehicule;
+    private BufferedImage decor;
+    /**Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.*/
+    private final int horizon = HEIGHT / 3;
 
-    public Etat etat; //etat du modele
+
+
+    /**Etat du modèle.*/
+    public Etat etat;
 
 
     /** Constructeur */
