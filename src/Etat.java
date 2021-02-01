@@ -20,7 +20,7 @@ public class Etat {
     /** Fait bouger horizontalement la moto à gauche */
     public void moveLeft(){
         if(this.pos.x - Affichage.getMove() < 0) //On évite que la moto sorte du cadre à gauche
-            this.pos.x = Affichage.getLargeurMoto()/2; //La moto est deplacée de move-pixel
+            this.pos.x = 0; //La moto est deplacée de move-pixel
         else
             this.pos.x -= Affichage.getMove(); //La moto est deplacé à gauche
     }
