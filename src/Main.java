@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String [] args) throws IOException {
         //Création de la fenetre
-        JFrame fenetre = new JFrame("PROJET");
+        JFrame fenetre = new JFrame("Une Moto !");
         fenetre.pack();
         fenetre.setVisible(true);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
