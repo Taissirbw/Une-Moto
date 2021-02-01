@@ -20,7 +20,7 @@ public class Affichage extends JPanel {
     private BufferedImage decor;
     private BufferedImage route;
     /**Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.*/
-    private final int horizon = HEIGHT / 3 + HEIGHT / 6;
+    private final int horizon = HEIGHT / 3;
 
     /**Permet de tester l'affichage dans un premier temps. A remplacer par les attributs de gestions de la moto
      * qui se trouveront dans le modèle.*/
@@ -39,7 +39,7 @@ public class Affichage extends JPanel {
         this.etat = etat;
         addMouseListener(new Control(etat,this)); //Gestion de la souris par la création du controleur
         moto = ImageIO.read(new File("Assets/moto.png"));
-        decor = ImageIO.read(new File("Assets/ciel-nuageux.png"));
+        decor = ImageIO.read(new File("Assets/horizon.png"));
         route = ImageIO.read(new File("Assets/route.png"));
     }
 
