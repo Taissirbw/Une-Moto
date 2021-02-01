@@ -56,13 +56,17 @@ public class Control implements MouseListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode(); //On évalue la touche pressée
-        if(keyCode == KeyEvent.VK_LEFT) //Si c'est la flèche directionnelle gauche
+
+        if(keyCode == KeyEvent.VK_LEFT) //flèche directionnelle gauche
             etat.moveLeft(); //on déplace la moto à gauche
-        else if(keyCode == KeyEvent.VK_RIGHT) //Si c'est la flèche directionnelle droite
+
+        else if(keyCode == KeyEvent.VK_RIGHT) //flèche directionnelle droite
             etat.moveRight(); //on déplace la moto à droite
-        else if(keyCode == KeyEvent.VK_DOWN) //Si c'est la flèche directionnelle bas
+
+        else if(keyCode == KeyEvent.VK_DOWN) //flèche directionnelle bas
             etat.moveDown(); //on déplace la moto en bas
-        else if(keyCode == KeyEvent.VK_UP) //Si c'est la flèche directionnelle haut
+
+        else if(keyCode == KeyEvent.VK_UP) //flèche directionnelle haut
             etat.moveUp(); //on déplace la moto en haut
 
         affichage.repaint(); //actualise l'affichage

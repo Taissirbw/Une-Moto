@@ -34,18 +34,18 @@ public class Etat {
     }
 
     public void moveDown(){
-        if((this.pos.y + Affichage.getHauteurMoto()) + Affichage.getMove() > Affichage.getHEIGHT()) //On évite que la moto sorte du cadre à gauche
+        if((this.pos.y + Affichage.getHauteurMoto()) + Affichage.getMove() > Affichage.getHEIGHT()) //On évite que la moto sorte du cadre en bas
             this.pos.y = Affichage.getHEIGHT() -  Affichage.getHauteurMoto(); //La moto est deplacée de move-pixel
         else
-            this.pos.y += Affichage.getMove(); //La moto est deplacé à gauche
+            this.pos.y += Affichage.getMove(); //La moto est deplacé en bas
     }
 
     /** Fait bouger horizontalement la moto à droite */
     public void moveUp(){
-        if((this.pos.y - Affichage.getMove())  < Affichage.getHorizon()) //On évite que la moto sorte du cadre à gauche
+        if((this.pos.y - Affichage.getMove())  < Affichage.getHorizon()) //On évite que la moto dépasse l'horizon
             this.pos.y = Affichage.getHorizon(); //La moto est deplacée de move-pixel
         else
-            this.pos.y -= Affichage.getMove(); //La moto est deplacée à droite
+            this.pos.y -= Affichage.getMove(); //La moto est deplacée en haut
     }
 
     /** Getter de la classe Etat */
