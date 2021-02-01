@@ -15,7 +15,7 @@ public class Affichage extends JPanel {
 
     /**Tampon pour stocker une image représentant le véhicule.*/
     private BufferedImage moto;
-    private int largeurMoto = 60;
+    private static int largeurMoto = 60;
     private int hauteurMoto = 46;
     private BufferedImage decor;
     private BufferedImage route;
@@ -27,23 +27,27 @@ public class Affichage extends JPanel {
     private int posMotoX = WIDTH/2 - largeurMoto;
     private int posMotoY = HEIGHT - hauteurMoto - 50;
 
-
+    /**Constante qui traduit de combien de pixel bouge la moto*/
+    private static int move = 50;
 
     /**Etat du modèle.*/
     public Etat etat;
+
+    /**Controleur du modèle.*/
+    public Control control;
 
 
     /** Constructeur */
     public Affichage(Etat etat) throws IOException {
         setPreferredSize(new Dimension(WIDTH, HEIGHT)); //Taille de la fenetre
         this.etat = etat;
+        this.control = new Control(etat,this); //création du controler
+        //addKeyListener(control); //Gestion du clavier par la création du controleur
         addMouseListener(new Control(etat,this)); //Gestion de la souris par la création du controleur
         moto = ImageIO.read(new File("Assets/moto.png"));
         decor = ImageIO.read(new File("Assets/horizon.png"));
         route = ImageIO.read(new File("Assets/route.png"));
     }
-
-
 
     /** affichage */
     @Override
@@ -51,8 +55,62 @@ public class Affichage extends JPanel {
         super.paint(g); //nettoie la zone d'affichage
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
-        g.drawImage(moto, posMotoX, posMotoY, largeurMoto, hauteurMoto, null);
+        g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
 
     }
 
+    /** Getter de la classe Affichage */
+
+    /** renvoie la largeur de la fenetre */
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    /** renvoie la hauteur de la fenetre */
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    /** renvoie la moto */
+    public BufferedImage getMoto() {
+        return moto;
+    }
+
+    /** renvoie la largeur de la moto */
+    public static int getLargeurMoto() {
+        return largeurMoto;
+    }
+
+    /** renvoie la hauteur de la moto */
+    public int getHauteurMoto() {
+        return hauteurMoto;
+    }
+
+    /** renvoie le decor */
+    public BufferedImage getDecor() {
+        return decor;
+    }
+
+    /** renvoie la route */
+    public BufferedImage getRoute() {
+        return route;
+    }
+
+    /** renvoie l'horizon */
+    public int getHorizon() {
+        return horizon;
+    }
+
+    public int getPosMotoX() {
+        return posMotoX;
+    }
+
+    public int getPosMotoY() {
+        return posMotoY;
+    }
+
+    /** renvoie la constante move */
+    public static int getMove() {
+        return move;
+    }
 }
