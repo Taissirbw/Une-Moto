@@ -16,11 +16,11 @@ public class Affichage extends JPanel {
     /**Tampon pour stocker une image représentant le véhicule.*/
     private BufferedImage moto;
     private static int largeurMoto = 60;
-    private int hauteurMoto = 46;
+    private static int hauteurMoto = 46;
     private BufferedImage decor;
     private BufferedImage route;
     /**Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.*/
-    private final int horizon = HEIGHT / 3;
+    private static final int horizon = HEIGHT / 3;
 
     /**Permet de tester l'affichage dans un premier temps. A remplacer par les attributs de gestions de la moto
      * qui se trouveront dans le modèle.*/
@@ -82,7 +82,7 @@ public class Affichage extends JPanel {
     }
 
     /** renvoie la hauteur de la moto */
-    public int getHauteurMoto() {
+    public static int getHauteurMoto() {
         return hauteurMoto;
     }
 
@@ -97,7 +97,7 @@ public class Affichage extends JPanel {
     }
 
     /** renvoie l'horizon */
-    public int getHorizon() {
+    public static int getHorizon() {
         return horizon;
     }
 

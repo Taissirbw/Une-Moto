@@ -33,6 +33,21 @@ public class Etat {
             this.pos.x += Affichage.getMove(); //La moto est deplacée à droite
     }
 
+    public void moveDown(){
+        if((this.pos.y + Affichage.getHauteurMoto()) + Affichage.getMove() > Affichage.getHEIGHT()) //On évite que la moto sorte du cadre à gauche
+            this.pos.y = Affichage.getHEIGHT() -  Affichage.getHauteurMoto(); //La moto est deplacée de move-pixel
+        else
+            this.pos.y += Affichage.getMove(); //La moto est deplacé à gauche
+    }
+
+    /** Fait bouger horizontalement la moto à droite */
+    public void moveUp(){
+        if((this.pos.y - Affichage.getMove())  < Affichage.getHorizon()) //On évite que la moto sorte du cadre à gauche
+            this.pos.y = Affichage.getHorizon(); //La moto est deplacée de move-pixel
+        else
+            this.pos.y -= Affichage.getMove(); //La moto est deplacée à droite
+    }
+
     /** Getter de la classe Etat */
 
     /** Renvoie la vitesse de la moto */
