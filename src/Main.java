@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 /** Classe principale */
 public class Main {
 
-    public static void main(String [] args){
+    public static void main(String [] args) throws IOException {
         //Création de la fenetre
         JFrame fenetre = new JFrame("PROJET");
         fenetre.pack();
