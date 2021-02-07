@@ -1,6 +1,7 @@
 # Une-Moto
-*"Mais ça ne ressemble pas à une moto."*
-Projet de Programmation Concurrente et des Interfaces Interactives
+*"Mais ça ne ressemble pas à une moto."* 
+  
+Projet de Programmation Concurrente et des Interfaces Interactives  
 Fanoa Razafimbelo et Taïssir Marcé, 2021
 
 ## Liens utiles
