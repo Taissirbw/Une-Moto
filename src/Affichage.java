@@ -20,7 +20,7 @@ public class Affichage extends JPanel {
 
     /**Véhicule.*/
     private BufferedImage moto;
-    private static int largeurMoto = 60;
+    private static int largeurMoto = 50;
     private static int hauteurMoto = 46;
     /**Constante qui traduit de combien de pixel bouge la moto*/
     private static int move = 20;
@@ -43,7 +43,7 @@ public class Affichage extends JPanel {
         route = ImageIO.read(new File("Assets/route.png"));
         ligneRoute = new ArrayList<>();
         ligneRoute.add(new Point(WIDTH/2 - 50, HEIGHT));
-        ligneRoute.add(new Point(WIDTH/2, HEIGHT - 50));
+        ligneRoute.add(new Point(WIDTH/2 - largeurMoto/2, HEIGHT - hauteurMoto/2 - 20));
         ligneRoute.add(new Point(WIDTH/2 + WIDTH/10 - 10, HEIGHT - HEIGHT/2 + 10));
         ligneRoute.add(new Point(WIDTH/ 2 - 60, HEIGHT - HEIGHT/4 - HEIGHT/4));
         ligneRoute.add(new Point(WIDTH/ 2, horizon));
@@ -54,7 +54,7 @@ public class Affichage extends JPanel {
     public void paint(Graphics g) {
         super.paint(g); //nettoie la zone d'affichage
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
-        //g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
+        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
 
         g.setColor(Color.BLACK);
         for (int i = 0; i < ligneRoute.size() - 1; i++) {

@@ -13,8 +13,8 @@ public class Etat {
 
     public Etat(){
         //Initialisation de la position de la voiture au début de la partie.
-        pos.setLocation(Affichage.getWIDTH()/2 - 5 * Affichage.getLargeurMoto()/6,
-                Affichage.getHEIGHT() - Affichage.getLargeurMoto());
+        pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
+                Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
     }
 
     /*---Déplacement de la moto...---*/
