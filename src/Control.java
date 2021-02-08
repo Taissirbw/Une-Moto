@@ -24,6 +24,16 @@ public class Control implements MouseListener, KeyListener {
     public void mouseClicked(MouseEvent e) { }
 
     @Override
+    public void mousePressed(MouseEvent e) { }
+    @Override
+    public void mouseReleased(MouseEvent e) { }
+    @Override
+    public void mouseEntered(MouseEvent e) { }
+    @Override
+    public void mouseExited(MouseEvent e) { }
+    /**Methodes héritées de la classe KeyListener**/
+
+    @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode(); //On évalue la touche pressée
         /*En fonction de la touche reconnue, on indique au modèle qu'il faut effectuer une modification
@@ -46,16 +56,6 @@ public class Control implements MouseListener, KeyListener {
         }
         affichage.repaint(); //TODO : actualise l'affichage - il faudra le mettre dans un thread lrosqu'on en fera un
     }
-
-    @Override
-    public void mousePressed(MouseEvent e) { }
-    @Override
-    public void mouseReleased(MouseEvent e) { }
-    @Override
-    public void mouseEntered(MouseEvent e) { }
-    @Override
-    public void mouseExited(MouseEvent e) { }
-    /**Methodes héritées de la classe KeyListener**/
     @Override
     public void keyTyped(KeyEvent e) { }
     @Override

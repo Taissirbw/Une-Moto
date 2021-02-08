@@ -10,11 +10,15 @@ public class Etat {
     /** Position de la moto */
     private Point pos = new Point();
 
+    /** Route */
+    Route route;
+
 
     public Etat(){
         //Initialisation de la position de la voiture au début de la partie.
         pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
+        this.route = new Route();
     }
 
     /*---Déplacement de la moto...---*/

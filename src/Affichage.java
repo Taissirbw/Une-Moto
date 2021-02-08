@@ -31,6 +31,7 @@ public class Affichage extends JPanel {
     /**Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.*/
     private static final int horizon = HEIGHT / 3;
 
+    /**L'ensemble de points qui constitue le route*/
     private ArrayList<Point> ligneRoute;
 
 
@@ -41,12 +42,7 @@ public class Affichage extends JPanel {
         moto = ImageIO.read(new File("Assets/moto.png"));
         decor = ImageIO.read(new File("Assets/horizon.png"));
         route = ImageIO.read(new File("Assets/route.png"));
-        ligneRoute = new ArrayList<>();
-        ligneRoute.add(new Point(WIDTH/2 - 50, HEIGHT));
-        ligneRoute.add(new Point(WIDTH/2 - largeurMoto/2, HEIGHT - hauteurMoto/2 - 20));
-        ligneRoute.add(new Point(WIDTH/2 + WIDTH/10 - 10, HEIGHT - HEIGHT/2 + 10));
-        ligneRoute.add(new Point(WIDTH/ 2 - 60, HEIGHT - HEIGHT/4 - HEIGHT/4));
-        ligneRoute.add(new Point(WIDTH/ 2, horizon));
+        ligneRoute = this.etat.route.getLigneRoute();
     }
 
     /** affichage */
