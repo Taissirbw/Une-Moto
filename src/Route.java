@@ -10,7 +10,7 @@ public class Route {
     private ArrayList<Point> ligneRoute;
 
     /**Distance entre les extrémités de la route et le centre*/
-    int gap = 100;
+    int gap = 50;
     /**L'extremité gauche de la route*/
     private ArrayList<Point> ligneRouteG =new ArrayList<>();
 
@@ -32,8 +32,11 @@ public class Route {
         ligneRoute.add(new Point(Affichage.WIDTH/ 2 - 60, Affichage.HEIGHT - Affichage.HEIGHT/4 - Affichage.HEIGHT/4));*/
         ligneRoute.add(new Point(Affichage.WIDTH/ 2, Affichage.getHorizon()));
         for( Point p: ligneRoute){
-            ligneRouteG.add(new Point(p.x - gap, p.y));
-            ligneRouteD.add(new Point(p.x + gap, p.y));
+            /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
+            * Ici la profondeur est représentée par p.y par une projection. */
+            int coeffProfondeur = gap * 2 * (p.y / (Affichage.HEIGHT - Affichage.getHorizon()));
+            ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
+            ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
         }
     }
 
