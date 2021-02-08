@@ -31,8 +31,10 @@ public class Affichage extends JPanel {
     /**Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.*/
     private static final int horizon = HEIGHT / 3;
 
-    /**L'ensemble de points qui constitue le route*/
+    /**L'ensemble de points qui constitue la route*/
     private ArrayList<Point> ligneRoute;
+    private ArrayList<Point> ligneRouteG;
+    private ArrayList<Point> ligneRouteD;
 
 
     /** Constructeur */
@@ -43,6 +45,8 @@ public class Affichage extends JPanel {
         decor = ImageIO.read(new File("Assets/horizon.png"));
         route = ImageIO.read(new File("Assets/route.png"));
         ligneRoute = this.etat.route.getLigneRoute();
+        ligneRouteD = this.etat.route.getLigneRouteD();
+        ligneRouteG = this.etat.route.getLigneRouteG();
     }
 
     /** affichage */
@@ -54,8 +58,17 @@ public class Affichage extends JPanel {
 
         g.setColor(Color.BLACK);
         for (int i = 0; i < ligneRoute.size() - 1; i++) {
+            //Construction de la ligne du centre
             g.drawLine( (int) ligneRoute.get(i).getX(), (int) ligneRoute.get(i).getY(),
                     (int) ligneRoute.get(i + 1).getX(), (int) ligneRoute.get(i + 1).getY());
+
+            //Construction de la ligne de droite
+            g.drawLine( (int) ligneRouteD.get(i).getX(), (int) ligneRouteD.get(i).getY(),
+                    (int) ligneRouteD.get(i + 1).getX(), (int) ligneRouteD.get(i + 1).getY());
+
+            //Construction de la ligne de gauche
+            g.drawLine( (int) ligneRouteG.get(i).getX(), (int) ligneRouteG.get(i).getY(),
+                    (int) ligneRouteG.get(i + 1).getX(), (int) ligneRouteG.get(i + 1).getY());
         }
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
     }
