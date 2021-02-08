@@ -1,62 +1,55 @@
 import java.awt.*;
 
 /** Classe Etat: definit l'état de l'interface, introduit une variable
- *              position qui indique la postion de la moto
+ *  position qui indique la position courante de la moto.
  * */
 public class Etat {
+
     /** Vitesse de la moto */
     private float vitesse;
-
     /** Position de la moto */
     private Point pos = new Point();
 
 
     public Etat(){
-        // Initialisation de la position de la voiture
-        pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),Affichage.getHEIGHT() - Affichage.getLargeurMoto() - 50);
-
+        //Initialisation de la position de la voiture au début de la partie.
+        pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
+                Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
     }
 
-    /** Fait bouger horizontalement la moto à gauche */
+    /*---Déplacement de la moto...---*/
+    /**Vers la gauche.*/
     public void moveLeft(){
         if(this.pos.x - Affichage.getMove() < 0) //On évite que la moto sorte du cadre à gauche
-            this.pos.x = 0; //La moto est deplacée de move-pixel
-        else
-            this.pos.x -= Affichage.getMove(); //La moto est deplacé à gauche
+            this.pos.x = 0;
+        else this.pos.x -= Affichage.getMove(); //La moto est deplacée à gauche.
     }
-
-    /** Fait bouger horizontalement la moto à droite */
+    /**Vers la droite.*/
     public void moveRight(){
-        if((this.pos.x + Affichage.getLargeurMoto()) + Affichage.getMove() > Affichage.getWIDTH()) //On évite que la moto sorte du cadre à gauche
-            this.pos.x = Affichage.getWIDTH() - Affichage.getLargeurMoto(); //La moto est deplacée de move-pixel
-        else
-            this.pos.x += Affichage.getMove(); //La moto est deplacée à droite
+        if((this.pos.x + Affichage.getLargeurMoto()) + Affichage.getMove() > Affichage.getWIDTH())
+            this.pos.x = Affichage.getWIDTH() - Affichage.getLargeurMoto();
+        else this.pos.x += Affichage.getMove();
     }
-
+    /**Vers le bas.*/
     public void moveDown(){
-        if((this.pos.y + Affichage.getHauteurMoto()) + Affichage.getMove() > Affichage.getHEIGHT()) //On évite que la moto sorte du cadre en bas
-            this.pos.y = Affichage.getHEIGHT() -  Affichage.getHauteurMoto(); //La moto est deplacée de move-pixel
-        else
-            this.pos.y += Affichage.getMove(); //La moto est deplacé en bas
+        if((this.pos.y + Affichage.getHauteurMoto()) + Affichage.getMove() > Affichage.getHEIGHT())
+            this.pos.y = Affichage.getHEIGHT() -  Affichage.getHauteurMoto();
+        else this.pos.y += Affichage.getMove();
     }
-
-    /** Fait bouger horizontalement la moto à droite */
+    /**Vers le haut.*/
     public void moveUp(){
-        if((this.pos.y - Affichage.getMove())  < Affichage.getHorizon()) //On évite que la moto dépasse l'horizon
-            this.pos.y = Affichage.getHorizon(); //La moto est deplacée de move-pixel
-        else
-            this.pos.y -= Affichage.getMove(); //La moto est deplacée en haut
+        /*Pour donner une impression d'horizon, on permet au haut la moto d'aller légèrement plus
+        *haut que la ligne d'horizon, tant que le bas de l'image ne dépasse pas celle-ci.
+        * */
+        if((this.pos.y - Affichage.getMove()) < Affichage.getHorizon() - Affichage.getHauteurMoto()/2)
+            this.pos.y = Affichage.getHorizon() - Affichage.getHauteurMoto()/2;
+        else this.pos.y -= Affichage.getMove();
     }
 
-    /** Getter de la classe Etat */
 
-    /** Renvoie la vitesse de la moto */
-    public float getVitesse() {
-        return this.vitesse;
-    }
 
-    /** Renvoie la position de la moto */
-    public Point getPos() {
-        return this.pos;
-    }
+    /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ETAT---*/
+
+    public float getVitesse() { return this.vitesse; }
+    public Point getPos() { return this.pos; }
 }
