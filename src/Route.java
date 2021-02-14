@@ -8,14 +8,15 @@ public class Route {
 
     /**L'ensemble de points qui constitue la route*/
     private ArrayList<Point> ligneRoute;
-
-    /**Distance entre les extrémités de la route et le centre*/
-    int gap = 50;
     /**L'extremité gauche de la route*/
     private ArrayList<Point> ligneRouteG =new ArrayList<>();
-
     /**L'extremité droite de la route*/
     private ArrayList<Point> ligneRouteD =new ArrayList<>();
+
+    /**Distance entre les extrémités de la route et le centre*/
+    private static final  int gap = 50;
+
+    private static final int fuiteY = 70;
 
     public Route(){
         this.ligneRoute =new ArrayList<>();
@@ -27,14 +28,20 @@ public class Route {
 
 
         ligneRoute.add(new Point(Affichage.WIDTH/2 , Affichage.HEIGHT));
-        /*ligneRoute.add(new Point(Affichage.WIDTH/2 - Affichage.getLargeurMoto()/2, Affichage.HEIGHT - Affichage.getHauteurMoto()/2 - 20));
-        ligneRoute.add(new Point(Affichage.WIDTH/2 + Affichage.WIDTH/10 - 10, Affichage.HEIGHT - Affichage.HEIGHT/2 + 10));
-        ligneRoute.add(new Point(Affichage.WIDTH/ 2 - 60, Affichage.HEIGHT - Affichage.HEIGHT/4 - Affichage.HEIGHT/4));*/
+
+
+        ligneRoute.add(new Point(Affichage.WIDTH/2 - Affichage.getLargeurMoto()/2, Affichage.HEIGHT - Affichage.getHauteurMoto()/2 - 20));
+        ligneRoute.add(new Point(Affichage.WIDTH/2 + Affichage.WIDTH/10 - 10, Affichage.HEIGHT - Affichage.HEIGHT/3));
+        ligneRoute.add(new Point(Affichage.WIDTH/ 2 - 60, Affichage.HEIGHT - Affichage.HEIGHT/2));
+
+
+
         ligneRoute.add(new Point(Affichage.WIDTH/ 2, Affichage.getHorizon()));
+
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
             * Ici la profondeur est représentée par p.y par une projection. */
-            int coeffProfondeur = gap * 2 * (p.y / (Affichage.HEIGHT - Affichage.getHorizon()));
+            int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
             ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
             ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
         }
