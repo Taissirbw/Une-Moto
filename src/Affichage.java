@@ -45,7 +45,7 @@ public class Affichage extends JPanel {
     public Affichage(Etat etat) throws IOException {
         this.etat = etat;
         setPreferredSize(new Dimension(WIDTH, HEIGHT)); //Définit la taille de la fenetre
-        moto = ImageIO.read(new File("Assets/moto.png"));
+        moto = ImageIO.read(new File("Assets/moto1.png"));
         decor = ImageIO.read(new File("Assets/horizon.png"));
         route = ImageIO.read(new File("Assets/route.png"));
         ligneRoute = this.etat.route.getLigneRoute();
