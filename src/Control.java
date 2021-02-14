@@ -49,6 +49,8 @@ public class Control implements MouseListener, KeyListener {
                 etat.moveDown();
                 break;
             case KeyEvent.VK_UP:
+                if(!this.affichage.avance.isAlive()) this.affichage.avance.start(); //lancement du thread
+                //etat.route.updateRoute();
                 etat.moveUp();
                 break;
             default:

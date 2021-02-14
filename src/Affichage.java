@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +38,8 @@ public class Affichage extends JPanel {
     private ArrayList<Point> ligneRouteG;
     private ArrayList<Point> ligneRouteD;
 
+    Avancer avance;
+
 
     /** Constructeur */
     public Affichage(Etat etat) throws IOException {
@@ -47,16 +51,28 @@ public class Affichage extends JPanel {
         ligneRoute = this.etat.route.getLigneRoute();
         ligneRouteD = this.etat.route.getLigneRouteD();
         ligneRouteG = this.etat.route.getLigneRouteG();
+        this.avance = new Avancer(this.etat,this);
+
+
     }
 
     /** affichage */
     @Override
     public void paint(Graphics g) {
         super.paint(g); //nettoie la zone d'affichage
-        g.drawImage(decor, 0, 0, WIDTH, horizon, null);
+        g.setColor(Color.BLACK);
         g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
 
-        g.setColor(Color.BLACK);
+        //c'est censé colorer la route en noir
+        /*Polygon polygon = new Polygon();
+
+        for(Point p : ligneRouteD) polygon.addPoint(p.x,p.y);
+        for(Point p : ligneRoute) polygon.addPoint(p.x,p.y);
+        for(Point p : ligneRouteG) polygon.addPoint(p.x,p.y);
+
+        g.fillPolygon(polygon);
+        g.drawPolygon(polygon);*/
+
         for (int i = 0; i < ligneRoute.size() - 1; i++) {
             //Construction de la ligne du centre
             g.drawLine( (int) ligneRoute.get(i).getX(), (int) ligneRoute.get(i).getY(),
@@ -70,7 +86,39 @@ public class Affichage extends JPanel {
             g.drawLine( (int) ligneRouteG.get(i).getX(), (int) ligneRouteG.get(i).getY(),
                     (int) ligneRouteG.get(i + 1).getX(), (int) ligneRouteG.get(i + 1).getY());
         }
+        //afficheRoute(g);
+        g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
+    }
+
+
+    /** Test d'affichage de la route en courbe de Bezier */
+    public void afficheRoute(Graphics g){
+
+        QuadCurve2D courbe = new QuadCurve2D.Double();
+        Point2D.Double debut = new Point2D.Double(ligneRoute.get(0).getX(), ligneRoute.get(0).getY()); //point de début
+        Point2D.Double ctrl = new Point2D.Double(ligneRoute.get(1).getX(), ligneRoute.get(1).getY()); //point de control de la courbe
+        Point2D.Double fin = new Point2D.Double(ligneRoute.get(2).getX(), ligneRoute.get(2).getY()); //point de fin
+        courbe.setCurve(debut,ctrl,fin);
+
+        QuadCurve2D courbeG = new QuadCurve2D.Double();
+        Point2D.Double debutG = new Point2D.Double(ligneRouteG.get(0).getX(), ligneRouteG.get(0).getY());
+        Point2D.Double ctrlG = new Point2D.Double(ligneRouteG.get(1).getX(), ligneRouteG.get(1).getY());
+        Point2D.Double finG = new Point2D.Double(ligneRouteG.get(2).getX(), ligneRouteG.get(2).getY());
+        courbeG.setCurve(debutG,ctrlG,finG);
+
+        QuadCurve2D courbeD = new QuadCurve2D.Double();
+        Point2D.Double debutD = new Point2D.Double(ligneRouteD.get(0).getX(), ligneRouteD.get(0).getY());
+        Point2D.Double ctrlD = new Point2D.Double(ligneRouteD.get(1).getX(), ligneRouteD.get(1).getY());
+        Point2D.Double finD = new Point2D.Double(ligneRouteD.get(2).getX(), ligneRouteD.get(2).getY());
+        courbeD.setCurve(debutD,ctrlD,finD);
+
+
+        Graphics2D g2 = (Graphics2D)g;
+        g2.draw(courbe);
+        g2.draw(courbeG);
+        g2.draw(courbeD);
+
     }
 
     /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE AFFICHAGE---*/

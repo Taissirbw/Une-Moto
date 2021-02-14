@@ -13,12 +13,14 @@ public class Etat {
     /** Route */
     Route route;
 
+    Avancer avancer;
+
 
     public Etat(){
         //Initialisation de la position de la voiture au début de la partie.
         pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
-        this.route = new Route();
+        this.route = new Route(); //création de la route
     }
 
     /*---Déplacement de la moto...---*/
