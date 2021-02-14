@@ -20,40 +20,61 @@ public class Route {
 
     public static Random rand = new Random();
 
-    int routeWIDTH = 200;
+    private static final int fuiteY = 70;
+
 
     public Route(){
         this.ligneRoute =new ArrayList<>();
         createRoute(); //création de la route
          }
 
+
     /** création de la route*/
-    public void createRoute(){
+    /*public void createRoute(){
 
         for(int i = Affichage.getHEIGHT(); i > Affichage.getHorizon(); i-=50) {
             //Variation au niveau de l'abscisse de chaque point
             int abs = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
             ligneRoute.add(new Point(abs, i));
         }
+
         //Création du dernier point
-        int absL = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap); //la valeur du random est bornée
+        //la valeur du random est bornée pour l'abscisse du dernier point
+        int absL = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
         ligneRoute.add(new Point(absL, Affichage.getHorizon()));
 
-        int coeff = (Affichage.getHEIGHT() - Affichage.getHorizon())/((Affichage.getWIDTH()/2 - routeWIDTH) - (Affichage.getWIDTH()/2));
-        int coeffD = ( Affichage.getHorizon() - Affichage.getHEIGHT())/(Affichage.getWIDTH()/2 - (Affichage.getWIDTH()/ + routeWIDTH));
-        //int coeffD = (Affichage.getHorizon() - Affichage.getHEIGHT())/( (Affichage.getWIDTH()/2) - (Affichage.getWIDTH()/2 + routeWIDTH));
-        System.out.println(coeffD);
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
-            * Ici la profondeur est représentée par p.y par une projection. */
+             * Ici la profondeur est représentée par p.y par une projection. */
+            /*int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
+            ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
+            ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
+        }
+    }*/
 
-            //ligneRouteG.add(new Point((p.y - Affichage.getHEIGHT())/coeff + gap, p.y));
-            //ligneRouteD.add(new Point((p.y - Affichage.getHEIGHT())/-coeffD, p.y));
+
+    /** création de la route*/
+
+    public void createRoute(){
 
 
-            int coeffProfondeur = gap * 2 * (p.y / (Affichage.HEIGHT - Affichage.getHorizon()));
-            ligneRouteG.add(new Point(p.x - gap , p.y));
-            ligneRouteD.add(new Point(p.x + gap  , p.y));
+        ligneRoute.add(new Point(Affichage.WIDTH/2 , Affichage.HEIGHT));
+
+
+        ligneRoute.add(new Point(Affichage.WIDTH/2 - Affichage.getLargeurMoto()/2, Affichage.HEIGHT - Affichage.getHauteurMoto()/2 - 20));
+        ligneRoute.add(new Point(Affichage.WIDTH/2 + Affichage.WIDTH/10 - 10, Affichage.HEIGHT - Affichage.HEIGHT/3));
+        ligneRoute.add(new Point(Affichage.WIDTH/ 2 - 60, Affichage.HEIGHT - Affichage.HEIGHT/2));
+
+
+
+        ligneRoute.add(new Point(Affichage.WIDTH/ 2, Affichage.getHorizon()));
+
+        for( Point p: ligneRoute){
+            /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
+             * Ici la profondeur est représentée par p.y par une projection. */
+            int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
+            ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
+            ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
         }
     }
 
