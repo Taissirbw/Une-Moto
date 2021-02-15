@@ -38,7 +38,8 @@ public class Affichage extends JPanel {
     private ArrayList<Point> ligneRouteG;
     private ArrayList<Point> ligneRouteD;
 
-    Avancer avance;
+    private Avancer avance;
+    private VueOiseau vue;
 
 
     /** Constructeur */
@@ -52,6 +53,7 @@ public class Affichage extends JPanel {
         ligneRouteD = this.etat.route.getLigneRouteD();
         ligneRouteG = this.etat.route.getLigneRouteG();
         this.avance = new Avancer(this.etat,this);
+        this.vue = new VueOiseau(this);
 
 
     }
@@ -94,6 +96,11 @@ public class Affichage extends JPanel {
         //Affichage du score
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH/4, 20);
+        try {
+            vue.dessiner(g);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -168,5 +175,11 @@ public class Affichage extends JPanel {
     public BufferedImage getRoute() { return route; }
     public static int getHorizon() { return horizon; }
 
+    public Avancer getAvance() {
+        return avance;
+    }
 
+    public VueOiseau getVue() {
+        return vue;
+    }
 }

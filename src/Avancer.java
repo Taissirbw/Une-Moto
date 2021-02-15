@@ -16,6 +16,7 @@ public class Avancer extends Thread {
         while (!this.arret){ //boucle infinie
             this.etat.route.updateRoute();
             this.etat.km += Affichage.getMove();
+            affichage.revalidate();
             affichage.repaint(); //actualisation de l'affichage
 
             try { Thread.sleep(100); } //Pause

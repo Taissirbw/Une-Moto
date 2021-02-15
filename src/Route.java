@@ -30,7 +30,7 @@ public class Route {
 
 
     /** création de la route*/
-    public void createRoute(){
+    /*public void createRoute(){
 
         //Création de points qui dépassent l'horizon
         for(int i = Affichage.getHEIGHT(); i > 0; i-=50) {
@@ -44,16 +44,16 @@ public class Route {
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
              * Ici la profondeur est représentée par p.y par une projection. */
-            int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
+           /* int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
             ligneRouteG.add(new Point(p.x - gap , p.y));
             ligneRouteD.add(new Point(p.x + gap , p.y));
         }
-    }
+    }*/
 
 
     /** création de la route*/
 
-    /*public void createRoute(){
+    public void createRoute(){
 
 
         ligneRoute.add(new Point(Affichage.WIDTH/2 , Affichage.HEIGHT));
@@ -70,11 +70,11 @@ public class Route {
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
              * Ici la profondeur est représentée par p.y par une projection. */
-            /*int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
+            int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
             ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
             ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
         }
-    }*/
+    }
 
     /** animation de la route*/
     public void updateRoute(){
@@ -97,6 +97,9 @@ public class Route {
             ligneRouteG.add(new Point(absL - gap, this.ligneRoute.get((this.ligneRoute.size() -2)).y - 50)); //Indice -2 car on vient d'ajouter un point a la liste ligneRoute
             ligneRouteD.add(new Point(absL + gap, this.ligneRoute.get((this.ligneRoute.size() -2)).y - 50));
         }
+
+
+
 
 
     }
