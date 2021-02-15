@@ -89,6 +89,10 @@ public class Affichage extends JPanel {
         //afficheRoute(g);
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
+
+        //Affichage du score
+        g.setFont(new Font("Verdana", Font.BOLD, 16));
+        g.drawString(" Score :" + this.etat.km, WIDTH - WIDTH/4, 20);
     }
 
 

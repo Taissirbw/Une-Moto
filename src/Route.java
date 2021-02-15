@@ -30,7 +30,7 @@ public class Route {
 
 
     /** création de la route*/
-    /*public void createRoute(){
+    public void createRoute(){
 
         for(int i = Affichage.getHEIGHT(); i > Affichage.getHorizon(); i-=50) {
             //Variation au niveau de l'abscisse de chaque point
@@ -42,20 +42,19 @@ public class Route {
         //la valeur du random est bornée pour l'abscisse du dernier point
         int absL = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
         ligneRoute.add(new Point(absL, Affichage.getHorizon()));
-
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
              * Ici la profondeur est représentée par p.y par une projection. */
-            /*int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
-            ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
-            ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
+            int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
+            ligneRouteG.add(new Point(p.x - gap , p.y));
+            ligneRouteD.add(new Point(p.x + gap , p.y));
         }
-    }*/
+    }
 
 
     /** création de la route*/
 
-    public void createRoute(){
+    /*public void createRoute(){
 
 
         ligneRoute.add(new Point(Affichage.WIDTH/2 , Affichage.HEIGHT));
@@ -72,11 +71,11 @@ public class Route {
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
              * Ici la profondeur est représentée par p.y par une projection. */
-            int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
+            /*int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
             ligneRouteG.add(new Point(p.x - gap - coeffProfondeur, p.y));
             ligneRouteD.add(new Point(p.x + gap + coeffProfondeur, p.y));
         }
-    }
+    }*/
 
     /** animation de la route*/
     public void updateRoute(){

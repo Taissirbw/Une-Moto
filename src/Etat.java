@@ -13,7 +13,11 @@ public class Etat {
     /** Route */
     Route route;
 
+    /** Animation de la route */
     Avancer avancer;
+
+    /** Score */
+    int km;
 
 
     public Etat(){
@@ -21,6 +25,7 @@ public class Etat {
         pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
         this.route = new Route(); //création de la route
+        this.km = 0;
     }
 
     /*---Déplacement de la moto...---*/
