@@ -32,16 +32,15 @@ public class Route {
     /** création de la route*/
     public void createRoute(){
 
-        for(int i = Affichage.getHEIGHT(); i > Affichage.getHorizon(); i-=50) {
+        //Création de points qui dépassent l'horizon
+        for(int i = Affichage.getHEIGHT(); i > 0; i-=50) {
             //Variation au niveau de l'abscisse de chaque point
             int abs = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
             ligneRoute.add(new Point(abs, i));
         }
 
-        //Création du dernier point
-        //la valeur du random est bornée pour l'abscisse du dernier point
-        int absL = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
-        ligneRoute.add(new Point(absL, Affichage.getHorizon()));
+
+
         for( Point p: ligneRoute){
             /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
              * Ici la profondeur est représentée par p.y par une projection. */
@@ -88,12 +87,15 @@ public class Route {
             this.ligneRouteG.get(i).setLocation(this.ligneRouteG.get(i).x  ,this.ligneRouteG.get(i).y + Affichage.getMove());
         }
 
-        //Lorsque le dernier point de la route est visible en dépassant l'horizon, un nouveau point est créé
-        if( this.ligneRoute.get((this.ligneRoute.size() -1)).y >= Affichage.getHorizon()){
+
+
+        //Lorsque le dernier point de la route entre dans la fenetre, un nouveau point est créé
+        if( this.ligneRoute.get((this.ligneRoute.size() -1)).y >= 0){
             int absL = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
-            ligneRoute.add(new Point(absL, Affichage.getHorizon() - 30));
-            ligneRouteG.add(new Point(absL - gap, Affichage.getHorizon() - 30));
-            ligneRouteD.add(new Point(absL + gap, Affichage.getHorizon() - 30));
+
+            ligneRoute.add(new Point(absL, this.ligneRoute.get((this.ligneRoute.size() -1)).y - 50));
+            ligneRouteG.add(new Point(absL - gap, this.ligneRoute.get((this.ligneRoute.size() -2)).y - 50)); //Indice -2 car on vient d'ajouter un point a la liste ligneRoute
+            ligneRouteD.add(new Point(absL + gap, this.ligneRoute.get((this.ligneRoute.size() -2)).y - 50));
         }
 
 

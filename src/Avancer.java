@@ -18,7 +18,7 @@ public class Avancer extends Thread {
             this.etat.km += Affichage.getMove();
             affichage.repaint(); //actualisation de l'affichage
 
-            try { Thread.sleep(200); } //Pause
+            try { Thread.sleep(100); } //Pause
             catch (Exception e) {
                 Thread.currentThread().interrupt(); //Interruption du thread
             }
