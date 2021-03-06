@@ -107,27 +107,59 @@ public class Affichage extends JPanel {
     /** Test d'affichage de la route en courbe de Bezier */
     public void afficheRoute(Graphics g){
 
-        /*QuadCurve2D courbe = new QuadCurve2D.Double();
-        Point2D.Double debut = new Point2D.Double(ligneRoute.get(0).getX(), ligneRoute.get(0).getY()); //point de début
-        Point2D.Double ctrl = new Point2D.Double(ligneRoute.get(1).getX(), ligneRoute.get(1).getY()); //point de control de la courbe
-        Point2D.Double fin = new Point2D.Double(ligneRoute.get(2).getX(), ligneRoute.get(2).getY()); //point de fin
-        courbe.setCurve(debut,ctrl,fin);
 
-        /*QuadCurve2D courbeG = new QuadCurve2D.Double();
-        Point2D.Double debutG = new Point2D.Double(ligneRouteG.get(0).getX(), ligneRouteG.get(0).getY());
-        Point2D.Double ctrlG = new Point2D.Double(ligneRouteG.get(1).getX(), ligneRouteG.get(1).getY());
-        Point2D.Double finG = new Point2D.Double(ligneRouteG.get(2).getX(), ligneRouteG.get(2).getY());
-        courbeG.setCurve(debutG,ctrlG,finG);
+        /* Création de la courbe de Bézier quadratique pour la ligne droite */
+        Graphics2D g2 = (Graphics2D)g;
 
-        QuadCurve2D courbeD = new QuadCurve2D.Double();
-        Point2D.Double debutD = new Point2D.Double(ligneRouteD.get(0).getX(), ligneRouteD.get(0).getY());
-        Point2D.Double ctrlD = new Point2D.Double(ligneRouteD.get(1).getX(), ligneRouteD.get(1).getY());
-        Point2D.Double finD = new Point2D.Double(ligneRouteD.get(2).getX(), ligneRouteD.get(2).getY());
-        courbeD.setCurve(debutD,ctrlD,finD);*/
+        //tracage de la ligne entre le premier point et la moitie du premier et deuxieme point
+        Point midD = new Point((ligneRouteD.get(1).x+ligneRouteD.get(0).x)/2, (ligneRouteD.get(1).y+ligneRouteD.get(0).y)/2);
+        g2.drawLine(ligneRouteD.get(0).x, ligneRouteD.get(0).y, midD.x, midD.y);
+
+
+        for(int i=1;i<ligneRouteD.size()-1;i++) {
+            //on calcule le milieu des points suivants
+            Point midD2 = new Point((ligneRouteD.get(i+1).x+ligneRouteD.get(i).x)/2, (ligneRouteD.get(i+1).y+ligneRouteD.get(i).y)/2);
+            //le point suivant devient le point de controle pour la courbe entre les deux milieux des points
+            QuadCurve2D courbe = new QuadCurve2D.Double();
+            courbe.setCurve(
+                    new Point2D.Double(midD.x,midD.y),
+                    new Point2D.Double(ligneRouteD.get(i).x,ligneRouteD.get(i).y),
+                    new Point2D.Double(midD2.x,midD2.y)
+            );
+            g2.draw(courbe);
+            //on met a jour le milieu
+            midD = midD2;
+        }
+        //on trace le dernier segment
+        g2.drawLine(midD.x, midD.y, ligneRouteD.get(ligneRouteD.size()-1).x, ligneRouteD.get(ligneRouteD.size()-1).y);
+
+
+        /* Création de la courbe de Bézier quadratique pour la ligne gauche */
+        //tracage de la ligne entre le premier point et la moitie du premier et deuxieme point
+        Point midG = new Point((ligneRouteG.get(1).x+ligneRouteG.get(0).x)/2, (ligneRouteG.get(1).y+ligneRouteG.get(0).y)/2);
+        g2.drawLine(ligneRouteG.get(0).x, ligneRouteG.get(0).y, midG.x, midG.y);
+
+
+        for(int i=1;i<ligneRouteG.size()-1;i++) {
+            //on calcule le milieu des points suivants
+            Point midG2 = new Point((ligneRouteG.get(i+1).x+ligneRouteG.get(i).x)/2, (ligneRouteG.get(i+1).y+ligneRouteG.get(i).y)/2);
+            //le point suivant devient le point de controle pour la courbe entre les deux milieux des points
+            QuadCurve2D courbe = new QuadCurve2D.Double();
+            courbe.setCurve(
+                    new Point2D.Double(midG.x,midG.y),
+                    new Point2D.Double(ligneRouteG.get(i).x,ligneRouteG.get(i).y),
+                    new Point2D.Double(midG2.x,midG2.y)
+            );
+            g2.draw(courbe);
+            //on met a jour le milieu
+            midG = midG2;
+        }
+        //on trace le dernier segment
+        g2.drawLine(midG.x, midG.y, ligneRouteG.get(ligneRouteG.size()-1).x, ligneRouteG.get(ligneRouteG.size()-1).y);
 
 
         //Création des courbes de Bézier pour chaque liste ligneRoute
-        Graphics2D g2 = (Graphics2D)g;
+        /*Graphics2D g2 = (Graphics2D)g;
         for(int i = 0; i < ligneRoute.size()-2; i+=2){
             QuadCurve2D courbe = new QuadCurve2D.Double();
             Point2D.Double debut = new Point2D.Double(ligneRoute.get(i).getX(), ligneRoute.get(i).getY()); //point de début
@@ -156,7 +188,7 @@ public class Affichage extends JPanel {
             courbeD.setCurve(debutD,ctrlD,finD);
 
             g2.draw(courbeD);
-        }
+        }*/
 
 
     }
