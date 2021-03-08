@@ -25,11 +25,13 @@ public class VueOiseau {
     /** affichage des images */
     public void dessiner(Graphics g) throws IOException {
 
-        loadEtat(); //chargement des etats de l'image
         oiseaux.add(new Oiseau(affichage));
 
         Oiseau o = oiseaux.get(0);
-        if(!o.getRunning()) o.start(); //lancement du thread
+        if(!o.getRunning()){
+            o.start(); //lancement du thread
+            loadEtat(); //chargement des etats de l'image
+        }
 
         //affichage de l'image
         g.drawImage(etat.get(o.getEtat()), o.getPosition(), o.getHauteur(),100,100, null);

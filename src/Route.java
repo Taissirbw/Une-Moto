@@ -98,6 +98,14 @@ public class Route {
             ligneRouteD.add(new Point(absL + gap, this.ligneRoute.get((this.ligneRoute.size() -2)).y - 50));
         }
 
+        //Lorsque le deuxieme point de la route dépasse la fenetre en bas,
+        if( this.ligneRoute.get(1).y >= Affichage.getHEIGHT()){
+            //on supprime le premier point de la route
+            ligneRoute.remove(this.ligneRoute.get(0));
+            ligneRouteG.remove(this.ligneRouteG.get(0));
+            ligneRouteD.remove(this.ligneRouteD.get(0));
+        }
+
 
 
 

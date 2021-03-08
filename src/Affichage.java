@@ -62,6 +62,7 @@ public class Affichage extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g); //nettoie la zone d'affichage
+        this.revalidate();
         g.setColor(Color.BLACK);
         g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
 
