@@ -14,7 +14,9 @@ public class Avancer extends Thread {
 
     /** Calcul de la vitesse par rapport a la moitié de la fenetre**/
     public float calculVitesse (){
+
         if (this.etat.getPos().x < Affichage.getWIDTH()/2)
+                // + l'abscisse de la moto est éloigné du centre + le délai du thread augmente
                 return vitesseMax * ((float)(Affichage.getWIDTH()/2)/this.etat.getPos().x);
         else {
             //Complementaire
@@ -28,11 +30,23 @@ public class Avancer extends Thread {
     public void run(){
         while (!this.arret){ //boucle infinie
             this.etat.route.updateRoute(); //mise a jour de la route
-            this.etat.route.updateCheckpoint();//mise a jour des points de controle
+
+            if(!this.etat.route.getCheckpoints().isEmpty())
+                this.etat.route.updateCheckpoint();//mise a jour des points de controle
+
+            //recréation des points de controle apres une certaine distance
+            if(this.etat.km%(Affichage.getMove()*100) == 0) this.etat.route.createCheckpoint();
             this.etat.km += Affichage.getMove(); //mise a jour des km parcourues (score)
+
+            //le timer est crédité quand on passe un point de controle
+            if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&
+                    this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y) this.etat.timer.chrono += 2;
+
+            ////actualisation de l'affichage
             affichage.revalidate();
-            affichage.repaint(); //actualisation de l'affichage
-            try { Thread.sleep((long) calculVitesse()); } //Pause
+            affichage.repaint();
+
+            try { Thread.sleep((long) calculVitesse()); } //Pause thread
             catch (Exception e) {
                 Thread.currentThread().interrupt(); //Interruption du thread
             }

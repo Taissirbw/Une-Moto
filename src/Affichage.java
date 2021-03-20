@@ -100,6 +100,7 @@ public class Affichage extends JPanel {
         //Affichage du score
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH/4, 20);
+        g.drawString(" Temps : " + this.etat.timer.chrono + " s", WIDTH - WIDTH/4, 40);
         try {
             vue.dessiner(g);
         } catch (IOException e) {

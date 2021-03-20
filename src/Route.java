@@ -29,7 +29,6 @@ public class Route {
     public Route(){
         this.ligneRoute =new ArrayList<>();
         createRoute(); //création de la route
-        createCheckpoint(); //création des points de controle
          }
 
 
@@ -115,8 +114,8 @@ public class Route {
     /** Création des points de controle*/
     public void createCheckpoint(){
         //La liste des points de controle n'est composée que de deux points
-        final Point cp = new Point(this.ligneRouteG.get(4));
-        final Point cp2 = new Point(this.ligneRouteD.get(4));
+        final Point cp = new Point(this.ligneRouteG.get(5));
+        final Point cp2 = new Point(this.ligneRouteD.get(5));
         checkpoints.add(cp);
         checkpoints.add(cp2);
     }
@@ -127,11 +126,10 @@ public class Route {
             this.checkpoints.get(0).setLocation(this.checkpoints.get(0).x-10,this.checkpoints.get(0).y + Affichage.getMove());
             this.checkpoints.get(1).setLocation(this.checkpoints.get(1).x+10,this.checkpoints.get(1).y + Affichage.getMove());
             //La liste est vidée quand les points dépasse l'horizon
-            if (this.checkpoints.get(0).y > Affichage.getHEIGHT()*5)
+            if (this.checkpoints.get(0).y > Affichage.getHEIGHT())
                 checkpoints.clear();
         }
-        //De nouveaux points sont créés
-        createCheckpoint();
+
     }
 
 

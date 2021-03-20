@@ -1,4 +1,8 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 /** Classe Etat: definit l'état de l'interface, introduit une variable
  *  position qui indique la position courante de la moto.
@@ -19,6 +23,9 @@ public class Etat {
     /** Score */
     int km;
 
+    /** Chrono */
+    Chrono timer;
+
 
     public Etat(){
         //Initialisation de la position de la voiture au début de la partie.
@@ -26,6 +33,8 @@ public class Etat {
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
         this.route = new Route(); //création de la route
         this.km = 0;
+        this.timer = new Chrono();
+
     }
 
     /*---Déplacement de la moto...---*/
