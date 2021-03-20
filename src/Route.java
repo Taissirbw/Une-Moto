@@ -18,6 +18,9 @@ public class Route {
     /**L'extremité droite de la route*/
     private ArrayList<Point> ligneRouteD =new ArrayList<>();
 
+    /**Les points de controle de la route*/
+    private ArrayList<Point> checkpoints =new ArrayList<>();
+
     public static Random rand = new Random();
 
     private static final int fuiteY = 70;
@@ -26,6 +29,7 @@ public class Route {
     public Route(){
         this.ligneRoute =new ArrayList<>();
         createRoute(); //création de la route
+        createCheckpoint(); //création des points de controle
          }
 
 
@@ -99,18 +103,37 @@ public class Route {
         }
 
         //Lorsque le deuxieme point de la route dépasse la fenetre en bas,
-        if( this.ligneRoute.get(1).y >= Affichage.getHEIGHT()){
+        if( this.ligneRoute.get(1).y > Affichage.getHEIGHT()){
             //on supprime le premier point de la route
             ligneRoute.remove(this.ligneRoute.get(0));
             ligneRouteG.remove(this.ligneRouteG.get(0));
             ligneRouteD.remove(this.ligneRouteD.get(0));
         }
 
-
-
-
-
     }
+
+    /** Création des points de controle*/
+    public void createCheckpoint(){
+        //La liste des points de controle n'est composée que de deux points
+        final Point cp = new Point(this.ligneRouteG.get(4));
+        final Point cp2 = new Point(this.ligneRouteD.get(4));
+        checkpoints.add(cp);
+        checkpoints.add(cp2);
+    }
+
+    /** Mise a jour des points de controle*/
+    public void updateCheckpoint(){
+        if(!this.checkpoints.isEmpty()) {
+            this.checkpoints.get(0).setLocation(this.checkpoints.get(0).x-10,this.checkpoints.get(0).y + Affichage.getMove());
+            this.checkpoints.get(1).setLocation(this.checkpoints.get(1).x+10,this.checkpoints.get(1).y + Affichage.getMove());
+            //La liste est vidée quand les points dépasse l'horizon
+            if (this.checkpoints.get(0).y > Affichage.getHEIGHT()*5)
+                checkpoints.clear();
+        }
+        //De nouveaux points sont créés
+        createCheckpoint();
+    }
+
 
     /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ROUTE---*/
     public ArrayList<Point> getLigneRoute() {
@@ -128,4 +151,9 @@ public class Route {
     public ArrayList<Point> getLigneRouteD() {
         return ligneRouteD;
     }
+
+    public ArrayList<Point> getCheckpoints() {
+        return checkpoints;
+    }
+
 }

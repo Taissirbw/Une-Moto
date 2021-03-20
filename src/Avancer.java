@@ -13,13 +13,13 @@ public class Avancer extends Thread {
     }
 
     /** Calcul de la vitesse par rapport a la moitié de la fenetre**/
-    public int calculVitesse (){
+    public float calculVitesse (){
         if (this.etat.getPos().x < Affichage.getWIDTH()/2)
-                return vitesseMax * ((Affichage.getWIDTH()/2)/this.etat.getPos().x);
+                return vitesseMax * ((float)(Affichage.getWIDTH()/2)/this.etat.getPos().x);
         else {
             //Complementaire
             int tmp = Affichage.getWIDTH() - this.etat.getPos().x;
-            return (vitesseMax * ((Affichage.getWIDTH()/2)/ tmp));
+            return (vitesseMax * ((float)(Affichage.getWIDTH()/2)/ tmp))+10;
         }
 
     }
@@ -27,14 +27,12 @@ public class Avancer extends Thread {
     @Override
     public void run(){
         while (!this.arret){ //boucle infinie
-            this.etat.route.updateRoute();
-            this.etat.km += Affichage.getMove();
+            this.etat.route.updateRoute(); //mise a jour de la route
+            this.etat.route.updateCheckpoint();//mise a jour des points de controle
+            this.etat.km += Affichage.getMove(); //mise a jour des km parcourues (score)
             affichage.revalidate();
             affichage.repaint(); //actualisation de l'affichage
-            System.out.println(this.etat.getPos());
-            System.out.println(Affichage.getWIDTH()/2);
-            System.out.println(calculVitesse());
-            try { Thread.sleep(calculVitesse()); } //Pause
+            try { Thread.sleep((long) calculVitesse()); } //Pause
             catch (Exception e) {
                 Thread.currentThread().interrupt(); //Interruption du thread
             }

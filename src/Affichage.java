@@ -38,6 +38,8 @@ public class Affichage extends JPanel {
     private ArrayList<Point> ligneRouteG;
     private ArrayList<Point> ligneRouteD;
 
+    private ArrayList<Point> checkpoints;
+
     private Avancer avance;
     private VueOiseau vue;
 
@@ -52,6 +54,7 @@ public class Affichage extends JPanel {
         ligneRoute = this.etat.route.getLigneRoute();
         ligneRouteD = this.etat.route.getLigneRouteD();
         ligneRouteG = this.etat.route.getLigneRouteG();
+        checkpoints = this.etat.route.getCheckpoints();
         this.avance = new Avancer(this.etat,this);
         this.vue = new VueOiseau(this);
 
@@ -93,7 +96,7 @@ public class Affichage extends JPanel {
         afficheRoute(g);
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
-
+        g.setColor(Color.BLACK);
         //Affichage du score
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH/4, 20);
@@ -157,39 +160,13 @@ public class Affichage extends JPanel {
         }
         //on trace le dernier segment
         g2.drawLine(midG.x, midG.y, ligneRouteG.get(ligneRouteG.size()-1).x, ligneRouteG.get(ligneRouteG.size()-1).y);
+        g2.setColor(Color.red);
+        g2.setStroke(new BasicStroke(4));
 
+        //Les deux points qui composent la liste des points de controle forme une ligne
+        if(!checkpoints.isEmpty())
+            g2.drawLine(checkpoints.get(0).x, checkpoints.get(0).y, checkpoints.get(1).x, checkpoints.get(1).y);
 
-        //Création des courbes de Bézier pour chaque liste ligneRoute
-        /*Graphics2D g2 = (Graphics2D)g;
-        for(int i = 0; i < ligneRoute.size()-2; i+=2){
-            QuadCurve2D courbe = new QuadCurve2D.Double();
-            Point2D.Double debut = new Point2D.Double(ligneRoute.get(i).getX(), ligneRoute.get(i).getY()); //point de début
-            Point2D.Double ctrl = new Point2D.Double(ligneRoute.get(i+1).getX(), ligneRoute.get(i+1).getY()); //point de control de la courbe
-            Point2D.Double fin = new Point2D.Double(ligneRoute.get(i+2).getX(), ligneRoute.get(i+2).getY()); //point de fin
-            courbe.setCurve(debut,ctrl,fin);
-
-            g2.draw(courbe);
-        }
-
-        for(int i = 0; i < ligneRoute.size()-2; i+=2){
-            QuadCurve2D courbeG = new QuadCurve2D.Double();
-            Point2D.Double debutG = new Point2D.Double(ligneRouteG.get(i).getX(), ligneRouteG.get(i).getY()); //point de début
-            Point2D.Double ctrlG = new Point2D.Double(ligneRouteG.get(i+1).getX(), ligneRouteG.get(i+1).getY()); //point de control de la courbe
-            Point2D.Double finG = new Point2D.Double(ligneRouteG.get(i+2).getX(), ligneRouteG.get(i+2).getY()); //point de fin
-            courbeG.setCurve(debutG,ctrlG,finG);
-
-            g2.draw(courbeG);
-        }
-
-        for(int i = 0; i < ligneRoute.size()-2; i+=2){
-            QuadCurve2D courbeD = new QuadCurve2D.Double();
-            Point2D.Double debutD = new Point2D.Double(ligneRouteD.get(i).getX(), ligneRouteD.get(i).getY()); //point de début
-            Point2D.Double ctrlD = new Point2D.Double(ligneRouteD.get(i+1).getX(), ligneRouteD.get(i+1).getY()); //point de control de la courbe
-            Point2D.Double finD = new Point2D.Double(ligneRouteD.get(i+2).getX(), ligneRouteD.get(i+2).getY()); //point de fin
-            courbeD.setCurve(debutD,ctrlD,finD);
-
-            g2.draw(courbeD);
-        }*/
 
 
     }
