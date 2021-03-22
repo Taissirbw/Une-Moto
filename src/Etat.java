@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 /** Classe Etat: definit l'état de l'interface, introduit une variable
@@ -27,7 +28,7 @@ public class Etat {
     Chrono timer;
 
 
-    public Etat(){
+    public Etat() throws IOException {
         //Initialisation de la position de la voiture au début de la partie.
         pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);

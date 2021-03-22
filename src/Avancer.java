@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.util.Random;
+
 /** Classe Avancer: gestion de l'avancée de l'ovale sur le parcours par le biais d'un thread
  * */
 public class Avancer extends Thread {
@@ -6,6 +9,7 @@ public class Avancer extends Thread {
     public boolean arret = false; //Condition de lancement du thread
     public int vitesseMax = 80;
     public float vitesse;
+    Random rand = new Random();
 
     public Avancer(Etat etat, Affichage affichage){
         this.etat = etat;
@@ -38,8 +42,16 @@ public class Avancer extends Thread {
                 this.etat.route.updateCheckpoint();//mise a jour des points de controle
 
             //recréation des points de controle apres une certaine distance
-            if(this.etat.km%(Affichage.getMove()*100) == 0) this.etat.route.createCheckpoint();
+            if(this.etat.km%(Affichage.getMove()*50) <= 0) this.etat.route.createCheckpoint();
             this.etat.km += Affichage.getMove(); //mise a jour des km parcourues (score)
+            this.etat.route.updateObstacles();
+
+            try {
+                this.etat.route.createObstacles();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             //le timer est crédité quand on passe un point de controle
             if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&

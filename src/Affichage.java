@@ -24,6 +24,8 @@ public class Affichage extends JPanel {
     private BufferedImage moto;
     private static int largeurMoto = 50;
     private static int hauteurMoto = 46;
+    private static int largeurObstacle = 70;
+    private static int hauteurObstacle = 50;
     /**Constante qui traduit de combien de pixel bouge la moto*/
     private static int move = 20;
 
@@ -66,6 +68,7 @@ public class Affichage extends JPanel {
     public void paint(Graphics g) {
         super.paint(g); //nettoie la zone d'affichage
         this.revalidate();
+
         g.setColor(Color.BLACK);
         g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
 
@@ -93,6 +96,11 @@ public class Affichage extends JPanel {
                     (int) ligneRouteG.get(i + 1).getX(), (int) ligneRouteG.get(i + 1).getY());
         }*/
 
+
+        for(int i = 0; i < this.etat.route.getObstacles().size(); i++){
+            Obstacle o = this.etat.route.getObstacles().get(i);
+            g.drawImage(o.getImage(),o.getPos().x,o.getPos().y,o.getWidth(),o.getHeight(),null);
+        }
         afficheRoute(g);
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
@@ -101,6 +109,8 @@ public class Affichage extends JPanel {
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH/4, 20);
         g.drawString(" Temps : " + this.etat.timer.chrono + " s", WIDTH - WIDTH/4, 40);
+
+
         try {
             vue.dessiner(g);
         } catch (IOException e) {
@@ -196,5 +206,13 @@ public class Affichage extends JPanel {
 
     public VueOiseau getVue() {
         return vue;
+    }
+
+    public static int getLargeurObstacle() {
+        return largeurObstacle;
+    }
+
+    public static int getHauteurObstacle() {
+        return hauteurObstacle;
     }
 }

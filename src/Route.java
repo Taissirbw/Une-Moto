@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,14 +22,20 @@ public class Route {
     /**Les points de controle de la route*/
     private ArrayList<Point> checkpoints =new ArrayList<>();
 
+    /**Obstacle*/
+    private ArrayList<Obstacle> obstacles =new ArrayList<>();
+
     public static Random rand = new Random();
 
     private static final int fuiteY = 70;
 
 
-    public Route(){
+    public Route() throws IOException {
         this.ligneRoute =new ArrayList<>();
         createRoute(); //création de la route
+        for(int i =0; i< 3;i++){
+            createObstacles();
+        }
          }
 
 
@@ -133,6 +140,32 @@ public class Route {
         }
     }
 
+    /** Création d'un obstacle*/
+    public void createObstacles() throws IOException {
+        int ajouter = rand.nextInt(100); //on choisit un nombre aléatoire entre 0 et 100
+        if(ajouter < 20) { //la probabilité de créer des obstacles
+            int randX = rand.nextInt(Affichage.getWIDTH() - 10) + 10;
+            int randY = rand.nextInt(Affichage.getHorizon() - 10) + 10;
+            //Création de l'obstacle
+            Obstacle o = new Obstacle(randX, randY);
+            obstacles.add(o);
+        }
+    }
+
+    /** Mise a jour des obstacles*/
+    public void updateObstacles(){
+        //Verifie que la liste n'est pas vide
+        if(!this.obstacles.isEmpty()) {
+            for(int i = 0; i<this.obstacles.size(); i++){
+                //L'ordonnée des obstacles se déplacent en meme temps que la route
+                this.obstacles.get(i).getPos().setLocation(this.obstacles.get(i).getPos().getX(), this.obstacles.get(i).getPos().getY() + Affichage.getMove() );
+                //L'obstacle est supprimé quand il sort de la fenetre
+                if (this.obstacles.get(i).getPos().getY() > Affichage.getHEIGHT())
+                    this.obstacles.remove(this.obstacles.get(i));
+            }
+        }
+    }
+
 
 
 
@@ -157,4 +190,7 @@ public class Route {
         return checkpoints;
     }
 
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
 }
