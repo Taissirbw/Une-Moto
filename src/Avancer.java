@@ -21,7 +21,7 @@ public class Avancer extends Thread {
     public float calculVitesse (){
 
         if (this.etat.getPos().x < Affichage.getWIDTH()/2) {
-            // + l'abscisse de la moto est éloigné du centre + le délai du thread augmente
+            // + l'abscisse de la moto est éloignée du centre + le délai du thread augmente
             return (vitesseMax * ((float) 480 / (this.etat.getPos().x+this.affichage.getLargeurMoto()))) + 10;
         }else {
             //Complementaire
@@ -56,13 +56,13 @@ public class Avancer extends Thread {
             //le timer est crédité quand on passe un point de controle
             if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&
                     this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y) this.etat.timer.chrono += 2;
-            System.out.println(vitesse);
-            System.out.println(this.etat.getPos().x);
+
+            //Vérifie les collisions avec le décor
             this.etat.checkCollision();
-            ////actualisation de l'affichage
+
+            //actualisation de l'affichage
             affichage.revalidate();
             affichage.repaint();
-
 
             try { Thread.sleep((long) vitesse);} //Pause thread
             catch (Exception e) {
