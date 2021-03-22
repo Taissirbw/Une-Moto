@@ -71,12 +71,17 @@ public class Etat {
         else this.pos.y -= Affichage.getMove();
     }
 
+    /** Test la collision entre la moto et un élément du décor */
     public void checkCollision(){
+        //On stock une variable avec un rectangle représentant les dimensions de la moto
         Rectangle pos = new Rectangle(this.pos.x,this.pos.y,Affichage.getLargeurMoto(),Affichage.getHauteurMoto());
+        //Pour chaque obstacle de la route
         for(int i = 0; i < this.route.getObstacles().size(); i++){
             Obstacle o = this.route.getObstacles().get(i);
+            //On stock une variable avec un rectangle représentant les dimensions de l'obstacle
             Rectangle dimO = o.getBorder();
-            if (dimO.intersects(pos))
+
+            if (dimO.intersects(pos)) //Vérifie s les deux rectangle entre en collision
                 o.visible = false;
         }
     }

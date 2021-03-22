@@ -96,13 +96,13 @@ public class Affichage extends JPanel {
                     (int) ligneRouteG.get(i + 1).getX(), (int) ligneRouteG.get(i + 1).getY());
         }*/
 
-
+        afficheRoute(g);
         for(int i = 0; i < this.etat.route.getObstacles().size(); i++){
             Obstacle o = this.etat.route.getObstacles().get(i);
             if(o.isVisible())
                 g.drawImage(o.getImage(),o.getPos().x,o.getPos().y,o.getWidth(),o.getHeight(),null);
         }
-        afficheRoute(g);
+
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
         g.setColor(Color.BLACK);
