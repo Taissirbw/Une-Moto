@@ -5,6 +5,7 @@ public class Avancer extends Thread {
     Affichage affichage; //affichage dans la fenetre
     public boolean arret = false; //Condition de lancement du thread
     public int vitesseMax = 80;
+    public float vitesse;
 
     public Avancer(Etat etat, Affichage affichage){
         this.etat = etat;
@@ -15,10 +16,12 @@ public class Avancer extends Thread {
     /** Calcul de la vitesse par rapport a la moitié de la fenetre**/
     public float calculVitesse (){
 
-        if (this.etat.getPos().x < Affichage.getWIDTH()/2)
-                // + l'abscisse de la moto est éloigné du centre + le délai du thread augmente
-                return vitesseMax * ((float)(Affichage.getWIDTH()/2)/this.etat.getPos().x);
-        else {
+        if (this.etat.getPos().x < Affichage.getWIDTH()/2) {
+            // + l'abscisse de la moto est éloigné du centre + le délai du thread augmente
+            //return vitesseMax * ((Affichage.getWIDTH()/2)/this.etat.getPos().x)+10;
+            int tmp = (Affichage.getWIDTH() - this.etat.getPos().x) ;
+            return (vitesseMax * ((float) 480 / (this.etat.getPos().x+50))) + 10;
+        }else {
             //Complementaire
             int tmp = Affichage.getWIDTH() - this.etat.getPos().x;
             return (vitesseMax * ((float)(Affichage.getWIDTH()/2)/ tmp))+10;
@@ -29,6 +32,7 @@ public class Avancer extends Thread {
     @Override
     public void run(){
         while (!this.etat.testPerdu()){ //boucle infinie
+            this.vitesse = calculVitesse();
             this.arret = true;
             this.etat.route.updateRoute(); //mise a jour de la route
 
@@ -42,12 +46,13 @@ public class Avancer extends Thread {
             //le timer est crédité quand on passe un point de controle
             if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&
                     this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y) this.etat.timer.chrono += 2;
-
+            System.out.println(vitesse);
+            System.out.println(this.etat.getPos().x);
             ////actualisation de l'affichage
             affichage.revalidate();
             affichage.repaint();
 
-            try { Thread.sleep((long) calculVitesse()); } //Pause thread
+            try { Thread.sleep((long) vitesse);} //Pause thread
             catch (Exception e) {
                 Thread.currentThread().interrupt(); //Interruption du thread
             }

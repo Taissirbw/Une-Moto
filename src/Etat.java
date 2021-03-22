@@ -44,7 +44,7 @@ public class Etat {
     /*---Déplacement de la moto...---*/
     /**Vers la gauche.*/
     public void moveLeft(){
-        if(this.pos.x - Affichage.getMove() < 0) //On évite que la moto sorte du cadre à gauche
+        if(this.pos.x - Affichage.getMove() < 1) //On évite que la moto sorte du cadre à gauche
             this.pos.x = 1;
         else this.pos.x -= Affichage.getMove(); //La moto est deplacée à gauche.
     }
