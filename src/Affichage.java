@@ -99,7 +99,8 @@ public class Affichage extends JPanel {
 
         for(int i = 0; i < this.etat.route.getObstacles().size(); i++){
             Obstacle o = this.etat.route.getObstacles().get(i);
-            g.drawImage(o.getImage(),o.getPos().x,o.getPos().y,o.getWidth(),o.getHeight(),null);
+            if(o.isVisible())
+                g.drawImage(o.getImage(),o.getPos().x,o.getPos().y,o.getWidth(),o.getHeight(),null);
         }
         afficheRoute(g);
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);

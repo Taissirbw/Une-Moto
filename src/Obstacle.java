@@ -14,7 +14,7 @@ public class Obstacle {
     private int width;
     private int height;
     /**Visibilité de l'obstacle à l'écran*/
-    private boolean visible;
+    public boolean visible;
     /**Image*/
     private BufferedImage image;
 

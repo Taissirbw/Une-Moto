@@ -71,6 +71,16 @@ public class Etat {
         else this.pos.y -= Affichage.getMove();
     }
 
+    public void checkCollision(){
+        Rectangle pos = new Rectangle(this.pos.x,this.pos.y,Affichage.getLargeurMoto(),Affichage.getHauteurMoto());
+        for(int i = 0; i < this.route.getObstacles().size(); i++){
+            Obstacle o = this.route.getObstacles().get(i);
+            Rectangle dimO = o.getBorder();
+            if (dimO.intersects(pos))
+                o.visible = false;
+        }
+    }
+
 
 
     /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ETAT---*/

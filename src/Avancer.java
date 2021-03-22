@@ -58,9 +58,11 @@ public class Avancer extends Thread {
                     this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y) this.etat.timer.chrono += 2;
             System.out.println(vitesse);
             System.out.println(this.etat.getPos().x);
+            this.etat.checkCollision();
             ////actualisation de l'affichage
             affichage.revalidate();
             affichage.repaint();
+
 
             try { Thread.sleep((long) vitesse);} //Pause thread
             catch (Exception e) {
