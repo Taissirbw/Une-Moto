@@ -28,7 +28,8 @@ public class Avancer extends Thread {
 
     @Override
     public void run(){
-        while (!this.arret){ //boucle infinie
+        while (!this.etat.testPerdu()){ //boucle infinie
+            this.arret = true;
             this.etat.route.updateRoute(); //mise a jour de la route
 
             if(!this.etat.route.getCheckpoints().isEmpty())

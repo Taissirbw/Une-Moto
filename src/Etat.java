@@ -37,6 +37,10 @@ public class Etat {
 
     }
 
+    public boolean testPerdu(){
+        return this.timer.chrono <= 0;
+    }
+
     /*---Déplacement de la moto...---*/
     /**Vers la gauche.*/
     public void moveLeft(){

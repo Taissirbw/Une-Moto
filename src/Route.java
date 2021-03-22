@@ -122,15 +122,18 @@ public class Route {
 
     /** Mise a jour des points de controle*/
     public void updateCheckpoint(){
+        //Verifie que la liste n'est pas vide
         if(!this.checkpoints.isEmpty()) {
+            //L'ordonnée des points se déplacent en meme temps que la route
             this.checkpoints.get(0).setLocation(this.checkpoints.get(0).x-10,this.checkpoints.get(0).y + Affichage.getMove());
             this.checkpoints.get(1).setLocation(this.checkpoints.get(1).x+10,this.checkpoints.get(1).y + Affichage.getMove());
             //La liste est vidée quand les points dépasse l'horizon
             if (this.checkpoints.get(0).y > Affichage.getHEIGHT())
                 checkpoints.clear();
         }
-
     }
+
+
 
 
     /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ROUTE---*/

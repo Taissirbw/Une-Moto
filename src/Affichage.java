@@ -106,6 +106,10 @@ public class Affichage extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if(this.etat.testPerdu()){
+            //Affichage de l'écran de fin avec le score
+            g.drawString("Temps écoulé !", WIDTH/2, HEIGHT/2);
+        }
     }
 
 
