@@ -18,9 +18,7 @@ public class Avancer extends Thread {
 
         if (this.etat.getPos().x < Affichage.getWIDTH()/2) {
             // + l'abscisse de la moto est éloigné du centre + le délai du thread augmente
-            //return vitesseMax * ((Affichage.getWIDTH()/2)/this.etat.getPos().x)+10;
-            int tmp = (Affichage.getWIDTH() - this.etat.getPos().x) ;
-            return (vitesseMax * ((float) 480 / (this.etat.getPos().x+50))) + 10;
+            return (vitesseMax * ((float) 480 / (this.etat.getPos().x+this.affichage.getLargeurMoto()))) + 10;
         }else {
             //Complementaire
             int tmp = Affichage.getWIDTH() - this.etat.getPos().x;
