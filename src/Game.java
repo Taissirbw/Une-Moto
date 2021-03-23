@@ -14,6 +14,7 @@ public class Game {
         JFrame fenetre = new JFrame("Une Moto !");
         fenetre.addKeyListener(control); //gestion des fleches du clavier
         fenetre.add(affichage); //La vue est ajoutée à la fenetre
+        fenetre.setLocation(300,36);
         fenetre.pack();
         fenetre.setVisible(true);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

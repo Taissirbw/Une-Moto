@@ -11,14 +11,18 @@ public class Main extends JPanel implements ActionListener {
     public Main(){
         menu = new JFrame(title);
         start = new JButton("start");
-        start.setPreferredSize(new Dimension(100,70));
+        start.setPreferredSize(new Dimension(100,40));
         start.addActionListener(this);
-        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        start.setLocation(0,0);
+        menu.setLocation(300,33);
+
+
         this.add(start);
         menu.getContentPane().add(this);
-        menu.setPreferredSize(new Dimension(300,300));
+        menu.setPreferredSize(new Dimension(500,200));
         menu.pack();
         menu.setVisible(true);
+        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
