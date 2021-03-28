@@ -15,6 +15,8 @@ public class Game {
         fenetre.addKeyListener(control); //gestion des fleches du clavier
         fenetre.add(affichage); //La vue est ajoutée à la fenetre
         fenetre.setLocation(300,36);
+        ImageIcon img = new ImageIcon("Assets/moto0.png");
+        fenetre.setIconImage(img.getImage());
         fenetre.pack();
         fenetre.setVisible(true);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
