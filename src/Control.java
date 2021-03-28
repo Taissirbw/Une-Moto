@@ -46,14 +46,14 @@ public class Control implements MouseListener, KeyListener {
                 etat.moveRight();
                 break;
             case KeyEvent.VK_DOWN:
-                etat.moveDown();
+                //etat.moveDown();
                 break;
             case KeyEvent.VK_UP:
                 if(!this.affichage.getAvance().isAlive() && !this.affichage.getAvance().arret) {
                     this.affichage.getAvance().start(); //lancement du thread
                     this.etat.timer.start(); //lancement du chronometre
                 }
-                etat.moveUp();
+                //etat.moveUp();
 
                 break;
             default:

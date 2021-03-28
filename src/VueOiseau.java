@@ -22,10 +22,14 @@ public class VueOiseau {
         this.affichage = affichage;
     }
 
+    public void addOiseau(){
+        oiseaux.add(new Oiseau(affichage));
+    }
+
     /** affichage des images */
     public void dessiner(Graphics g) throws IOException {
 
-        oiseaux.add(new Oiseau(affichage));
+        addOiseau();
 
         Oiseau o = oiseaux.get(0);
         if(!o.getRunning()){
