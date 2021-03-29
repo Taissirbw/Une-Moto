@@ -16,7 +16,7 @@ public class Main extends JPanel implements ActionListener {
 
     /** Dimension de la fenetre */
     private int width = 600;
-    private int height = 300;
+    private int height = 340;
 
     public Main() throws IOException {
         //Création de la fenetre
@@ -28,8 +28,9 @@ public class Main extends JPanel implements ActionListener {
         menu.setIconImage(img.getImage());
 
         //Image d'arriere-plan
-        JLabel background = new JLabel(new ImageIcon("Assets/route.png"));
+        JLabel background = new JLabel(new ImageIcon("Assets/menu.png"));
         background.setLocation(0,0);
+
         background.setLayout(new FlowLayout(FlowLayout.CENTER,20,width/3));
 
         //Création des boutons

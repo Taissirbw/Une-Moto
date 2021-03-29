@@ -18,23 +18,38 @@ public class Avancer extends Thread {
     }
 
     /** Calcul de la vitesse par rapport a la moitié de la fenetre**/
-    public float calculVitesse (){
+    public float calculVitesse () {
 
-        if (this.etat.getPos().x < Affichage.getWIDTH()/2) {
+
+        if ((this.etat.getPos().x < affichage.getLigneRouteD().get(0).x) &&
+                this.etat.getPos().x > affichage.getLigneRouteG().get(0).x) {
             // + l'abscisse de la moto est éloignée du centre + le délai du thread augmente
-            return (vitesseMax * ((float) 480 / (this.etat.getPos().x+this.affichage.getLargeurMoto()))) + 10;
-        }else {
-            //Complementaire
-            int tmp = Affichage.getWIDTH() - this.etat.getPos().x;
-            return (vitesseMax * ((float)(Affichage.getWIDTH()/2)/ tmp))+10;
-        }
+            return (vitesseMax * (480 / (this.etat.getPos().x + this.affichage.getLargeurMoto())));
+        } else {
+            int dist;
+            if (this.etat.getPos().x >= affichage.getLigneRouteD().get(0).x) {
+                dist = this.etat.getPos().x - affichage.getLigneRouteD().get(0).x;
+            } else {
+                dist = affichage.getLigneRouteG().get(0).x - this.etat.getPos().x;
+            }
+            return (vitesseMax * (480 / (this.etat.getPos().x + this.affichage.getLargeurMoto()))) + dist/5;
 
+            /**if (this.etat.getPos().x < Affichage.getWIDTH()/2) {
+             // + l'abscisse de la moto est éloignée du centre + le délai du thread augmente
+             return (vitesseMax * ( 480 / (this.etat.getPos().x + this.affichage.getLargeurMoto()))) + 10;
+             }else {
+             //Complementaire
+             int tmp = Affichage.getWIDTH() - this.etat.getPos().x;
+             return (vitesseMax * ((float)(Affichage.getWIDTH()/2)/ tmp))+10;
+             }**/
+        }
     }
 
     @Override
     public void run(){
         while (!this.etat.testPerdu()){ //boucle infinie
-            this.vitesse = calculVitesse();
+            this.vitesse = calculVitesse() +  etat.penalite;
+            if (etat.penalite > 0) etat.penalite --;
             this.arret = true;
             this.etat.route.updateRoute(); //mise a jour de la route
 
@@ -59,6 +74,9 @@ public class Avancer extends Thread {
 
             //Vérifie les collisions avec le décor
             this.etat.checkCollision();
+
+            System.out.print(vitesse + " ");
+            System.out.print("PENALITE : " + etat.penalite + " ");
 
             //actualisation de l'affichage
             affichage.revalidate();

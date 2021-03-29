@@ -21,6 +21,7 @@ public class Etat {
 
     /** Score */
     int km;
+    float penalite;
 
     /** Chrono */
     Chrono timer;
@@ -32,6 +33,7 @@ public class Etat {
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
         this.route = new Route(); //création de la route
         this.km = 0;
+        this.penalite = 0;
         this.timer = new Chrono();
 
     }
@@ -80,7 +82,8 @@ public class Etat {
             Rectangle dimO = o.getBorder();
 
             if (dimO.intersects(pos)) //Vérifie s les deux rectangle entre en collision
-                o.visible = false;
+                //o.visible = false;
+                penalite += 10;
         }
     }
 
