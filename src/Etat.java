@@ -81,9 +81,10 @@ public class Etat {
             //On stock une variable avec un rectangle représentant les dimensions de l'obstacle
             Rectangle dimO = o.getBorder();
 
-            if (dimO.intersects(pos)) //Vérifie s les deux rectangle entre en collision
-                //o.visible = false;
+            if (dimO.intersects(pos) && o.isVisible()) { //Vérifie s les deux rectangle entre en collision
+                o.visible = false;
                 penalite += 10;
+            }
         }
     }
 
