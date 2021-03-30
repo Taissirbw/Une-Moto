@@ -9,6 +9,7 @@ public class Avancer extends Thread {
     public boolean arret = false; //Condition de lancement du thread
     public int vitesseMax = 80;
     public float vitesse;
+
     Random rand = new Random();
 
     public Avancer(Etat etat, Affichage affichage){
@@ -28,7 +29,7 @@ public class Avancer extends Thread {
         } else {
             int dist;
             if (this.etat.getPos().x >= affichage.getLigneRouteD().get(0).x) {
-                dist = this.etat.getPos().x - affichage.getLigneRouteD().get(0).x;
+                dist = - (affichage.getLigneRouteD().get(0).x - this.etat.getPos().x);
             } else {
                 dist = affichage.getLigneRouteG().get(0).x - this.etat.getPos().x;
             }
@@ -47,15 +48,19 @@ public class Avancer extends Thread {
 
     @Override
     public void run(){
-        while (!this.etat.testPerdu()){ //boucle infinie
+        while (!this.etat.testPerdu()){ //boucle principale du jeu
             this.vitesse = calculVitesse() +  etat.penalite;
             if (etat.penalite > 0) etat.penalite --;
             this.arret = true;
-            this.etat.route.updateRoute(); //mise a jour de la route
+            //mise a jour de la route
+            this.etat.route.updateRoute();
 
+            if (etat.left) this.etat.moveLeft();
+            if (etat.right) this.etat.moveRight();
+
+            //mise a jour des points de controle
             if(!this.etat.route.getCheckpoints().isEmpty())
-                this.etat.route.updateCheckpoint();//mise a jour des points de controle
-
+                this.etat.route.updateCheckpoint();
             //recréation des points de controle apres une certaine distance
             if(this.etat.km%(Affichage.getMove()*50) <= 0) this.etat.route.createCheckpoint();
             this.etat.km += Affichage.getMove(); //mise a jour des km parcourues (score)
@@ -67,7 +72,6 @@ public class Avancer extends Thread {
                 e.printStackTrace();
             }
 
-
             //le timer est crédité quand on passe un point de controle
             if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&
                     this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y) this.etat.timer.chrono += 2;
@@ -75,12 +79,10 @@ public class Avancer extends Thread {
             //Vérifie les collisions avec le décor
             this.etat.checkCollision();
 
-            System.out.print(vitesse + " ");
-            System.out.print("PENALITE : " + etat.penalite + " ");
 
             //actualisation de l'affichage
-            affichage.revalidate();
-            affichage.repaint();
+            //affichage.revalidate();
+            //affichage.repaint();
 
             try { Thread.sleep((long) vitesse);} //Pause thread
             catch (Exception e) {

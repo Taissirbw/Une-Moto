@@ -12,6 +12,8 @@ public class Etat {
     private float vitesse;
     /** Position de la moto */
     private Point pos = new Point();
+    public boolean left = false;
+    public boolean right = false;
 
     /** Route */
     Route route;
