@@ -117,20 +117,21 @@ public class Affichage extends JPanel {
                     (int) ligneRouteG.get(i + 1).getX(), (int) ligneRouteG.get(i + 1).getY());
         }*/
 
+        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
         afficheRoute(g);
         for (int i = 0; i < this.etat.route.getObstacles().size(); i++) {
             Obstacle o = this.etat.route.getObstacles().get(i);
             if (o.isVisible())
                 g.drawImage(o.getImage(), o.getPos().x, o.getPos().y, o.getWidth(), o.getHeight(), null);
         }
-
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
         try {
             vueSoleil.dessiner(g);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
+
+
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
         g.setColor(Color.BLACK);
         //Affichage du score
