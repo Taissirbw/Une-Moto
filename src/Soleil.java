@@ -1,3 +1,5 @@
+/** Classe Soleil: création d'un soleil animé
+ * */
 public class Soleil extends Thread {
 
     /**délai entre chaque frame du gif*/
