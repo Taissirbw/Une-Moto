@@ -5,15 +5,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/** Classe VueSoleil: Thread de l'animation du soleil créé
+ * */
 public class VueSoleil {
 
-    /** liste des etats d'une image */
+    /** liste des frame d'une image */
     ArrayList<BufferedImage> frames;
 
     /** Affichage */
     Affichage affichage;
 
-    /** liste d'image a afficher*/
+    /** liste de sol a afficher*/
     ArrayList<Soleil> sun;
 
     /** Dimension de l'image */
@@ -26,6 +28,7 @@ public class VueSoleil {
         this.sun = new ArrayList<>();
     }
 
+    /** Créé un nouveau soleil et l'ajoute a la liste de soleil */
     public void addSoleil(){
         sun.add(new Soleil(affichage));
     }
@@ -51,14 +54,14 @@ public class VueSoleil {
 
     /** charge dans la liste etat les differents etat de l'image */
     public void loadEtat() throws IOException {
-        //Chargement des différents état d'une image
+        //Chargement des différentes frames d'une image
         BufferedImage soleil1 = ImageIO.read(new File("Assets/sun/sun1.png"));
         BufferedImage soleil2 = ImageIO.read(new File("Assets/sun/sun2.png"));
         BufferedImage soleil3 = ImageIO.read(new File("Assets/sun/sun3.png"));
         BufferedImage soleil4 = ImageIO.read(new File("Assets/sun/sun4.png"));
         BufferedImage soleil5 = ImageIO.read(new File("Assets/sun/sun5.png"));
 
-        //Ajout des etats dans la liste
+        //Ajout des frames dans la liste
         this.frames.add(soleil1);
         this.frames.add(soleil2);
         this.frames.add(soleil3);
