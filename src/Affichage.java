@@ -57,7 +57,8 @@ public class Affichage extends JPanel {
     private ArrayList<Point> checkpoints;
 
     private Avancer avance;
-    private VueOiseau vue;
+    private VueOiseau vueOiseau;
+    private VueSoleil vueSoleil;
 
 
     /**
@@ -74,7 +75,9 @@ public class Affichage extends JPanel {
         ligneRouteG = this.etat.route.getLigneRouteG();
         checkpoints = this.etat.route.getCheckpoints();
         this.avance = new Avancer(this.etat, this);
-        this.vue = new VueOiseau(this);
+        this.vueOiseau = new VueOiseau(this);
+        this.vueSoleil = new VueSoleil(this);
+
 
 
     }
@@ -88,7 +91,7 @@ public class Affichage extends JPanel {
         this.revalidate();
 
         g.setColor(Color.BLACK);
-        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
+
 
         //c'est censé colorer la route en noir
         /*Polygon polygon = new Polygon();
@@ -122,6 +125,12 @@ public class Affichage extends JPanel {
         }
 
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
+        try {
+            vueSoleil.dessiner(g);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
         g.setColor(Color.BLACK);
         //Affichage du score
@@ -131,7 +140,7 @@ public class Affichage extends JPanel {
 
 
         try {
-            vue.dessiner(g);
+            vueOiseau.dessiner(g);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -248,7 +257,7 @@ public class Affichage extends JPanel {
     }
 
     public VueOiseau getVue() {
-        return vue;
+        return vueOiseau;
     }
 
     public static int getLargeurObstacle() {
