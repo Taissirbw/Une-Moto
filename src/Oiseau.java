@@ -16,7 +16,7 @@ public class Oiseau extends Thread {
         this.delai = 200;
         this.etat = 0;
         this.hauteur = 20;
-        this.position = 0;
+        this.position = -100;//La position initiale de l'oiseau est situé en dehors de la fenetre
         this.affichage = affichage;
     }
 
