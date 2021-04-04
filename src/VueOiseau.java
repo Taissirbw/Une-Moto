@@ -40,8 +40,13 @@ public class VueOiseau {
         //affichage de l'image
         g.drawImage(etat.get(o.getEtat()), o.getPosition(), o.getHauteur(),100,100, null);
 
-        //l'image est enlevée de la liste lorsque son thread est terminé
-        if (o.isInterrupted()) oiseaux.remove(o);
+        //l'image est enlevée de la liste lorsque l'oiseau sort de l'écran
+        if(o.getPosition() > Affichage.getWIDTH()){
+            o.interrupt();
+            oiseaux.remove(o);
+        }
+
+        if(oiseaux.isEmpty()) addOiseau(); //ajoute un oiseau
 
         //actualisation de l'affichage
         affichage.revalidate();
