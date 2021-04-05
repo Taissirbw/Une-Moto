@@ -69,8 +69,8 @@ public class Affichage extends JPanel {
         this.etat = etat;
         setPreferredSize(new Dimension(WIDTH, HEIGHT)); //Définit la taille de la fenetre
         moto = ImageIO.read(new File("Assets/moto1.png"));
-        decor = ImageIO.read(new File("Assets/horizon.png"));
-        route = ImageIO.read(new File("Assets/piste.png"));
+        decor = ImageIO.read(new File("Assets/horizon2.png"));
+        route = ImageIO.read(new File("Assets/planet2.png"));
         ligneRoute = this.etat.route.getLigneRoute();
         ligneRouteD = this.etat.route.getLigneRouteD();
         ligneRouteG = this.etat.route.getLigneRouteG();
@@ -90,7 +90,7 @@ public class Affichage extends JPanel {
         this.revalidate();
 
         g.setColor(Color.BLACK);
-        g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
+        g.drawImage(route, 0, 0, WIDTH, HEIGHT, null);
 
         afficheRoute(g);
         for (int i = 0; i < this.etat.route.getObstacles().size(); i++) {
@@ -99,9 +99,9 @@ public class Affichage extends JPanel {
                 g.drawImage(o.getImage(), o.getPos().x, o.getPos().y, o.getWidth(), o.getHeight(), null);
         }
 
-        g.drawImage(decor, 0, 0, WIDTH, horizon, null);
+        g.drawImage(decor, 0, 0, WIDTH, HEIGHT, null);
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         //Affichage du score
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH / 4, 20);
