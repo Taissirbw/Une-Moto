@@ -1,7 +1,10 @@
+import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
 /** Classe Control: effectue les changement dans le modèle et informe
  *  l'affichage de la modification.
@@ -43,9 +46,20 @@ public class Control implements MouseListener, KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
                 etat.left = true;
+                    try {
+                        affichage.moto = ImageIO.read(new File("Assets/moto1G.png"));
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
                 break;
             case KeyEvent.VK_RIGHT:
                 etat.right = true;
+                try {
+                    affichage.moto = ImageIO.read(new File("Assets/moto1D.png"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 break;
             case KeyEvent.VK_UP:
                 /**Si le jeu n'est pas encore lancé, on démarre le thread de la boucle principale du jeu, ainsi
@@ -71,9 +85,19 @@ public class Control implements MouseListener, KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
                 etat.left = false;
+                try {
+                    affichage.moto = ImageIO.read(new File("Assets/moto1.png"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 break;
             case KeyEvent.VK_RIGHT:
                 etat.right = false;
+                try {
+                    affichage.moto = ImageIO.read(new File("Assets/moto1.png"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 break;
             default:
                 break;

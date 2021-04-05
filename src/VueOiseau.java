@@ -10,7 +10,7 @@ public class VueOiseau {
     /** liste d'image a afficher*/
     ArrayList<Oiseau> oiseaux;
     /** liste des etats d'une image */
-    ArrayList<BufferedImage> etat;
+    ArrayList<BufferedImage> frames;
     /** Affichage */
     Affichage affichage;
 
@@ -20,7 +20,7 @@ public class VueOiseau {
      * */
     public VueOiseau(Affichage affichage) {
         this.oiseaux = new ArrayList<>();
-        this.etat = new ArrayList<>();
+        this.frames = new ArrayList<>();
         this.affichage = affichage;
     }
 
@@ -40,7 +40,7 @@ public class VueOiseau {
         }
 
         //affichage de l'image
-        g.drawImage(etat.get(o.getEtat()), o.getPosition(), o.getHauteur(),100,100, null);
+        g.drawImage(frames.get(o.getEtat()), o.getPosition(), o.getHauteur(),100,100, null);
 
         //l'image est enlevée de la liste lorsque l'oiseau sort de l'écran
         if(o.getPosition() > Affichage.getWIDTH()){
@@ -69,12 +69,12 @@ public class VueOiseau {
         BufferedImage oiseau8 = ImageIO.read(new File("Assets/oiseau/oiseau8.png"));
 
         //Ajout des etats dans la liste
-        this.etat.add(oiseau1);
-        this.etat.add(oiseau2);
-        this.etat.add(oiseau3);
-        this.etat.add(oiseau4);
-        this.etat.add(oiseau5);
-        this.etat.add(oiseau6);
-        this.etat.add(oiseau7);
+        this.frames.add(oiseau1);
+        this.frames.add(oiseau2);
+        this.frames.add(oiseau3);
+        this.frames.add(oiseau4);
+        this.frames.add(oiseau5);
+        this.frames.add(oiseau6);
+        this.frames.add(oiseau7);
     }
 }
