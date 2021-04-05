@@ -12,6 +12,10 @@ public class Oiseau extends Thread {
     private Affichage affichage;
     private boolean running = false;
 
+    /**
+     * CONSTRUCTEUR DE LA CLASSE OISEAU
+     *
+     * */
     public Oiseau(Affichage affichage) {
         this.delai = 200;
         this.etat = 0;

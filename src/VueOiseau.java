@@ -9,13 +9,15 @@ public class VueOiseau {
 
     /** liste d'image a afficher*/
     ArrayList<Oiseau> oiseaux;
-
     /** liste des etats d'une image */
     ArrayList<BufferedImage> etat;
-
     /** Affichage */
     Affichage affichage;
 
+    /**
+     * CONSTRUCTEUR DE LA CLASSE VUEOISEAU
+     *
+     * */
     public VueOiseau(Affichage affichage) {
         this.oiseaux = new ArrayList<>();
         this.etat = new ArrayList<>();

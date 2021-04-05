@@ -4,6 +4,10 @@ public class Chrono extends Thread {
     int chrono;
     public boolean arret = false; //Condition de lancement du thread
 
+    /**
+     * CONSTRUCTEUR DE LA CLASSE CHRONO
+     *
+     * */
     public Chrono(){
         this.chrono = start;
     }
