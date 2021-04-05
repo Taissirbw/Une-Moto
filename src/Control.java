@@ -89,6 +89,8 @@ public class Control implements MouseListener, KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
                 etat.left = false;
+                affichage.largeurMoto = 50;
+                affichage.hauteurMoto = 46;
                 try {
                     affichage.moto = ImageIO.read(new File("Assets/moto1.png"));
                 } catch (IOException ex) {
