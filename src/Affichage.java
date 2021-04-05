@@ -28,8 +28,8 @@ public class Affichage extends JPanel {
      * Véhicule.
      */
     protected BufferedImage moto;
-    private static int largeurMoto = 50;
-    private static int hauteurMoto = 46;
+    protected static int largeurMoto = 50;
+    protected static int hauteurMoto = 46;
     private static int largeurObstacle = 50;
     private static int hauteurObstacle = 50;
 

@@ -46,6 +46,8 @@ public class Control implements MouseListener, KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
                 etat.left = true;
+                affichage.largeurMoto = 46;
+                affichage.hauteurMoto = 55;
                     try {
                         affichage.moto = ImageIO.read(new File("Assets/moto1G.png"));
                     } catch (IOException ex) {
@@ -55,6 +57,8 @@ public class Control implements MouseListener, KeyListener {
                 break;
             case KeyEvent.VK_RIGHT:
                 etat.right = true;
+                affichage.largeurMoto = 46;
+                affichage.hauteurMoto = 55;
                 try {
                     affichage.moto = ImageIO.read(new File("Assets/moto1D.png"));
                 } catch (IOException ex) {
@@ -93,6 +97,8 @@ public class Control implements MouseListener, KeyListener {
                 break;
             case KeyEvent.VK_RIGHT:
                 etat.right = false;
+                affichage.largeurMoto = 50;
+                affichage.hauteurMoto = 46;
                 try {
                     affichage.moto = ImageIO.read(new File("Assets/moto1.png"));
                 } catch (IOException ex) {
