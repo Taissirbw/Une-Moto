@@ -46,7 +46,7 @@ public class Avancer extends Thread {
                 /** Si la moto est à gauche de la piste*/
                 dist = affichage.getLigneRouteG().get(0).x - this.etat.getPos().x;
             }
-            return (vitesseMax * (480 / (float) (this.etat.getPos().x + (float) this.affichage.getLargeurMoto())))
+            return (vitesseMax * (480 / (float) (this.etat.getPos().x + (float) Affichage.getLargeurMoto())))
                     + (float) dist/5;
         }
 

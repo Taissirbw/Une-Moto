@@ -231,11 +231,11 @@ public class Affichage extends JPanel {
         return vue;
     }
 
-    public int getLargeurObstacle() {
+    public static int getLargeurObstacle() {
         return largeurObstacle;
     }
 
-    public int getHauteurObstacle() {
+    public static int getHauteurObstacle() {
         return hauteurObstacle;
     }
 
