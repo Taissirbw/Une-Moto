@@ -9,13 +9,15 @@ public class VueOiseau {
 
     /** liste d'image a afficher*/
     ArrayList<Oiseau> oiseaux;
-
     /** liste des etats d'une image */
     ArrayList<BufferedImage> etat;
-
     /** Affichage */
     Affichage affichage;
 
+    /**
+     * CONSTRUCTEUR DE LA CLASSE VUEOISEAU
+     *
+     * */
     public VueOiseau(Affichage affichage) {
         this.oiseaux = new ArrayList<>();
         this.etat = new ArrayList<>();
@@ -40,13 +42,8 @@ public class VueOiseau {
         //affichage de l'image
         g.drawImage(etat.get(o.getEtat()), o.getPosition(), o.getHauteur(),100,100, null);
 
-        //l'image est enlevée de la liste lorsque l'oiseau sort de l'écran
-        if(o.getPosition() > Affichage.getWIDTH()){
-            o.interrupt();
-            oiseaux.remove(o);
-        }
-
-        if(oiseaux.isEmpty()) addOiseau(); //ajoute un oiseau
+        //l'image est enlevée de la liste lorsque son thread est terminé
+        if (o.isInterrupted()) oiseaux.remove(o);
 
         //actualisation de l'affichage
         affichage.revalidate();

@@ -12,11 +12,15 @@ public class Oiseau extends Thread {
     private Affichage affichage;
     private boolean running = false;
 
+    /**
+     * CONSTRUCTEUR DE LA CLASSE OISEAU
+     *
+     * */
     public Oiseau(Affichage affichage) {
         this.delai = 200;
         this.etat = 0;
         this.hauteur = 20;
-        this.position = -100;//La position initiale de l'oiseau est situé en dehors de la fenetre
+        this.position = 0;
         this.affichage = affichage;
     }
 

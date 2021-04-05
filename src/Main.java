@@ -1,7 +1,9 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,17 +32,23 @@ public class Main extends JPanel implements ActionListener {
         //Image d'arriere-plan
         JLabel background = new JLabel(new ImageIcon("Assets/menu.png"));
         background.setLocation(0,0);
-
-        background.setLayout(new FlowLayout(FlowLayout.CENTER,20,width/3));
+        background.setLayout(new FlowLayout(FlowLayout.CENTER,40,width/3));
 
         //Création des boutons
-        start = new JButton("start");
-        start.setPreferredSize(new Dimension(100,20));
+        ImageIcon startIcon = new ImageIcon("Assets/start.png");
+        start = new JButton(startIcon);
+        start.setContentAreaFilled(false);
+        start.setBorderPainted(false);
+        start.setPreferredSize(new Dimension(100,30));
         start.addActionListener(this);
         background.add(start);
 
-        exit = new JButton("quit");
-        exit.setPreferredSize(new Dimension(100,20));
+        ImageIcon quitIcon = new ImageIcon("Assets/quit.png");
+        exit = new JButton(quitIcon);
+        exit.setBorderPainted(false);
+        exit.setContentAreaFilled(false);
+        exit.setFocusPainted(false);
+        exit.setPreferredSize(new Dimension(100,30));
         exit.addActionListener(this);
         background.add(exit);
 
@@ -55,7 +63,7 @@ public class Main extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == start){
-            //fermeture de la fenetre
+            //fermeture de la fenetre menu
             this.menu.dispose();
             String[] args1 = {"10"};
             try {

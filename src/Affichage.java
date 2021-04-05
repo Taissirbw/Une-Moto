@@ -30,8 +30,9 @@ public class Affichage extends JPanel {
     private BufferedImage moto;
     private static int largeurMoto = 50;
     private static int hauteurMoto = 46;
-    private static int largeurObstacle = 70;
+    private static int largeurObstacle = 50;
     private static int hauteurObstacle = 50;
+
     /**
      * Constante qui traduit de combien de pixel bouge la moto
      */
@@ -57,27 +58,25 @@ public class Affichage extends JPanel {
     private ArrayList<Point> checkpoints;
 
     private Avancer avance;
-    private VueOiseau vueOiseau;
-    private VueSoleil vueSoleil;
+    private VueOiseau vue;
 
 
     /**
-     * Constructeur
-     */
+     * CONSTRUCTEUR DE LA CLASSE AFFICHAGE
+     *
+     * */
     public Affichage(Etat etat) throws IOException {
         this.etat = etat;
         setPreferredSize(new Dimension(WIDTH, HEIGHT)); //Définit la taille de la fenetre
         moto = ImageIO.read(new File("Assets/moto1.png"));
         decor = ImageIO.read(new File("Assets/horizon.png"));
-        route = ImageIO.read(new File("Assets/route.png"));
+        route = ImageIO.read(new File("Assets/piste.png"));
         ligneRoute = this.etat.route.getLigneRoute();
         ligneRouteD = this.etat.route.getLigneRouteD();
         ligneRouteG = this.etat.route.getLigneRouteG();
         checkpoints = this.etat.route.getCheckpoints();
         this.avance = new Avancer(this.etat, this);
-        this.vueOiseau = new VueOiseau(this);
-        this.vueSoleil = new VueSoleil(this);
-
+        this.vue = new VueOiseau(this);
 
 
     }
@@ -91,47 +90,16 @@ public class Affichage extends JPanel {
         this.revalidate();
 
         g.setColor(Color.BLACK);
-
-
-        //c'est censé colorer la route en noir
-        /*Polygon polygon = new Polygon();
-
-        for(Point p : ligneRouteD) polygon.addPoint(p.x,p.y);
-        for(Point p : ligneRoute) polygon.addPoint(p.x,p.y);
-        for(Point p : ligneRouteG) polygon.addPoint(p.x,p.y);
-
-        g.fillPolygon(polygon);
-        g.drawPolygon(polygon);*/
-
-        /*for (int i = 0; i < ligneRoute.size() - 1; i++) {
-            //Construction de la ligne du centre
-            g.drawLine( (int) ligneRoute.get(i).getX(), (int) ligneRoute.get(i).getY(),
-                    (int) ligneRoute.get(i + 1).getX(), (int) ligneRoute.get(i + 1).getY());
-
-            //Construction de la ligne de droite
-            g.drawLine( (int) ligneRouteD.get(i).getX(), (int) ligneRouteD.get(i).getY(),
-                    (int) ligneRouteD.get(i + 1).getX(), (int) ligneRouteD.get(i + 1).getY());
-
-            //Construction de la ligne de gauche
-            g.drawLine( (int) ligneRouteG.get(i).getX(), (int) ligneRouteG.get(i).getY(),
-                    (int) ligneRouteG.get(i + 1).getX(), (int) ligneRouteG.get(i + 1).getY());
-        }*/
-
         g.drawImage(route, 0, horizon, WIDTH, HEIGHT - horizon, null);
+
         afficheRoute(g);
         for (int i = 0; i < this.etat.route.getObstacles().size(); i++) {
             Obstacle o = this.etat.route.getObstacles().get(i);
             if (o.isVisible())
                 g.drawImage(o.getImage(), o.getPos().x, o.getPos().y, o.getWidth(), o.getHeight(), null);
         }
+
         g.drawImage(decor, 0, 0, WIDTH, horizon, null);
-        try {
-            vueSoleil.dessiner(g);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         g.drawImage(moto, this.etat.getPos().x, this.etat.getPos().y, largeurMoto, hauteurMoto, null);
         g.setColor(Color.BLACK);
         //Affichage du score
@@ -141,13 +109,14 @@ public class Affichage extends JPanel {
 
 
         try {
-            vueOiseau.dessiner(g);
+            vue.dessiner(g);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (this.etat.testPerdu()) {
+        if (this.etat.gameOver) {
             //Affichage de l'écran de fin avec le score
-            g.drawString("Temps écoulé !", WIDTH / 2, HEIGHT / 2);
+
+            g.drawString(etat.testPerdu(), WIDTH / 2, HEIGHT / 2);
         }
     }
 
@@ -161,6 +130,7 @@ public class Affichage extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         //tracage de la ligne entre le premier point et la moitie du premier et deuxieme point
         Point midD = new Point((ligneRouteD.get(1).x + ligneRouteD.get(0).x) / 2, (ligneRouteD.get(1).y + ligneRouteD.get(0).y) / 2);
+        g2.setColor(Color.WHITE);
         g2.drawLine(ligneRouteD.get(0).x, ligneRouteD.get(0).y, midD.x, midD.y);
 
         for (int i = 1; i < ligneRouteD.size() - 1; i++) {
@@ -258,14 +228,14 @@ public class Affichage extends JPanel {
     }
 
     public VueOiseau getVue() {
-        return vueOiseau;
+        return vue;
     }
 
-    public static int getLargeurObstacle() {
+    public int getLargeurObstacle() {
         return largeurObstacle;
     }
 
-    public static int getHauteurObstacle() {
+    public int getHauteurObstacle() {
         return hauteurObstacle;
     }
 

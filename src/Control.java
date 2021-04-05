@@ -13,7 +13,10 @@ public class Control implements MouseListener, KeyListener {
     /**Affichage du modèle.*/
     public Affichage affichage;
 
-    /**Constructeur.*/
+    /**
+     * CONSTRUCTEUR DE LA CLASSE CONTROL
+     *
+     * */
     public Control(Etat etat, Affichage affichage){
         this.etat = etat;
         this.affichage = affichage;
@@ -22,7 +25,6 @@ public class Control implements MouseListener, KeyListener {
     /**Methodes héritées de la classe MouseListener**/
     @Override
     public void mouseClicked(MouseEvent e) { }
-
     @Override
     public void mousePressed(MouseEvent e) { }
     @Override
@@ -35,9 +37,9 @@ public class Control implements MouseListener, KeyListener {
     /**Methodes héritées de la classe KeyListener**/
     @Override
     public void keyPressed(KeyEvent e) {
+        /** En fonction de la touche reconnue, on indique au modèle que la moto se déplace dans une direction.
+         * L'arrêt du déplacement est geré par la méthode keyReleased. */
         int keyCode = e.getKeyCode(); //On évalue la touche pressée
-        /*En fonction de la touche reconnue, on indique au modèle qu'il faut effectuer une modification
-         * de la position de la moto.*/
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
                 etat.left = true;
@@ -45,16 +47,13 @@ public class Control implements MouseListener, KeyListener {
             case KeyEvent.VK_RIGHT:
                 etat.right = true;
                 break;
-            case KeyEvent.VK_DOWN:
-                //etat.moveDown();
-                break;
             case KeyEvent.VK_UP:
-                if(!this.affichage.getAvance().isAlive() && !this.affichage.getAvance().arret) {
+                /**Si le jeu n'est pas encore lancé, on démarre le thread de la boucle principale du jeu, ainsi
+                 * que le timer.*/
+                if(!this.affichage.getAvance().isAlive() && !this.affichage.getAvance().inGame) {
                     this.affichage.getAvance().start(); //lancement du thread
                     this.etat.timer.start(); //lancement du chronometre
                 }
-                //etat.moveUp();
-
                 break;
             default:
                 break;
@@ -62,28 +61,19 @@ public class Control implements MouseListener, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e) { }
 
-    }
     @Override
-
     public void keyReleased(KeyEvent e) {
-        int keyCode = e.getKeyCode(); //On évalue la touche pressée
-        /*En fonction de la touche reconnue, on indique au modèle qu'il faut effectuer une modification
-         * de la position de la moto.*/
+        /* Lorsque la touche est relachée, on indique au modèle que la moto n'est plus en train
+         * de se déplacer.*/
+        int keyCode = e.getKeyCode();
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
                 etat.left = false;
                 break;
             case KeyEvent.VK_RIGHT:
                 etat.right = false;
-                break;
-            case KeyEvent.VK_DOWN:
-                //etat.moveDown();
-                break;
-            case KeyEvent.VK_UP:
-                //etat.moveUp();
-
                 break;
             default:
                 break;

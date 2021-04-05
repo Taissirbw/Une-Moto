@@ -8,72 +8,45 @@ import java.util.Random;
  * */
 public class Route {
 
-    /**L'ensemble de points qui constitue la route*/
+    /** Liste des points qui constitue la route*/
     private ArrayList<Point> ligneRoute;
 
-    /**Distance entre les extrémités de la route et le centre*/
+    /**Distance entre les bords de la route et le centre*/
     int gap = 50;
-    /**L'extremité gauche de la route*/
+    /** Bord gauche de la route*/
     private ArrayList<Point> ligneRouteG =new ArrayList<>();
-
-    /**L'extremité droite de la route*/
+    /** Bord droite de la route*/
     private ArrayList<Point> ligneRouteD =new ArrayList<>();
 
-    /**Les points de controle de la route*/
+    /** Les points de controle de la route */
     private ArrayList<Point> checkpoints =new ArrayList<>();
-
-    /**Obstacle*/
+    /** Obstacle */
     private ArrayList<Obstacle> obstacles =new ArrayList<>();
 
     public static Random rand = new Random();
 
-    private static final int fuiteY = 70;
 
-
+    /**
+     * CONSTRUCTEUR DE LA CLASSE ROUTE
+     *
+     * */
     public Route() throws IOException {
         this.ligneRoute =new ArrayList<>();
         createRoute(); //création de la route
-        for(int i =0; i< 3;i++){
+        for(int i =0; i < 3;i++){
             createObstacles();
         }
-         }
+    }
 
 
     /** création de la route*/
-    /*public void createRoute(){
-
-        //Création de points qui dépassent l'horizon
-        for(int i = Affichage.getHEIGHT(); i > 0; i-=50) {
-            //Variation au niveau de l'abscisse de chaque point
-            int abs = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
-            ligneRoute.add(new Point(abs, i));
-        }
-
-
-
-        for( Point p: ligneRoute){
-            /*calcule la déformation de la largeur de la piste à l'écran en fonction de la profondeur.
-             * Ici la profondeur est représentée par p.y par une projection. */
-           /* int coeffProfondeur = gap * ((p.y) / (Affichage.HEIGHT - Affichage.getHorizon()));
-            ligneRouteG.add(new Point(p.x - gap , p.y));
-            ligneRouteD.add(new Point(p.x + gap , p.y));
-        }
-    }*/
-
-
-    /** création de la route*/
-
     public void createRoute(){
 
-
         ligneRoute.add(new Point(Affichage.WIDTH/2 , Affichage.HEIGHT));
-
 
         ligneRoute.add(new Point(Affichage.WIDTH/2 - Affichage.getLargeurMoto()/2, Affichage.HEIGHT - Affichage.getHauteurMoto()/2 - 20));
         ligneRoute.add(new Point(Affichage.WIDTH/2 + Affichage.WIDTH/10 - 10, Affichage.HEIGHT - Affichage.HEIGHT/3));
         ligneRoute.add(new Point(Affichage.WIDTH/ 2 - 60, Affichage.HEIGHT - Affichage.HEIGHT/2));
-
-
 
         ligneRoute.add(new Point(Affichage.WIDTH/ 2, Affichage.getHorizon()));
 
@@ -97,8 +70,6 @@ public class Route {
             this.ligneRouteG.get(i).setLocation(this.ligneRouteG.get(i).x  ,this.ligneRouteG.get(i).y + Affichage.getMove());
         }
 
-
-
         //Lorsque le dernier point de la route entre dans la fenetre, un nouveau point est créé
         if( this.ligneRoute.get((this.ligneRoute.size() -1)).y >= 0){
             int absL = rand.nextInt((((Affichage.getWIDTH() / 2) + gap) - ((Affichage.getWIDTH()/ 2) - gap))) + ((Affichage.getWIDTH() / 2) - gap);
@@ -115,8 +86,9 @@ public class Route {
             ligneRouteG.remove(this.ligneRouteG.get(0));
             ligneRouteD.remove(this.ligneRouteD.get(0));
         }
-
     }
+
+    /** --- POINTS DE CONTROLE DE LA ROUTE ---**/
 
     /** Création des points de controle*/
     public void createCheckpoint(){
@@ -140,6 +112,8 @@ public class Route {
         }
     }
 
+    /** --- OBSTACLES DE LA ROUTE ---**/
+
     /** Création d'un obstacle*/
     public void createObstacles() throws IOException {
         int ajouter = rand.nextInt(100); //on choisit un nombre aléatoire entre 0 et 100
@@ -158,7 +132,8 @@ public class Route {
         if(!this.obstacles.isEmpty()) {
             for(int i = 0; i<this.obstacles.size(); i++){
                 //L'ordonnée des obstacles se déplacent en meme temps que la route
-                this.obstacles.get(i).getPos().setLocation(this.obstacles.get(i).getPos().getX(), this.obstacles.get(i).getPos().getY() + Affichage.getMove() );
+                this.obstacles.get(i).getPos().setLocation( this.obstacles.get(i).getPos().getX(),
+                        this.obstacles.get(i).getPos().getY() + Affichage.getMove() );
                 //L'obstacle est supprimé quand il sort de la fenetre
                 if (this.obstacles.get(i).getPos().getY() > Affichage.getHEIGHT())
                     this.obstacles.remove(this.obstacles.get(i));
@@ -167,30 +142,12 @@ public class Route {
     }
 
 
+    /**---METHODES D'ACCES AUX ATTRIBUTS DE LA CLASSE ROUTE---*/
+    public ArrayList<Point> getLigneRoute() { return this.ligneRoute; }
+    public int getGap() { return gap; }
+    public ArrayList<Point> getLigneRouteG() { return ligneRouteG; }
+    public ArrayList<Point> getLigneRouteD() { return ligneRouteD; }
+    public ArrayList<Point> getCheckpoints() { return checkpoints; }
+    public ArrayList<Obstacle> getObstacles() { return obstacles; }
 
-
-    /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ROUTE---*/
-    public ArrayList<Point> getLigneRoute() {
-        return this.ligneRoute;
-    }
-
-    public int getGap() {
-        return gap;
-    }
-
-    public ArrayList<Point> getLigneRouteG() {
-        return ligneRouteG;
-    }
-
-    public ArrayList<Point> getLigneRouteD() {
-        return ligneRouteD;
-    }
-
-    public ArrayList<Point> getCheckpoints() {
-        return checkpoints;
-    }
-
-    public ArrayList<Obstacle> getObstacles() {
-        return obstacles;
-    }
 }
