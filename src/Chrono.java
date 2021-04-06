@@ -15,7 +15,7 @@ public class Chrono extends Thread {
 
     @Override
     public void run(){
-        while (chrono >=0){ //boucle infinie
+        while (chrono >0){ //boucle infinie
             chrono -= 1;
             try { Thread.sleep(1000); } //Pause
             catch (Exception e) {

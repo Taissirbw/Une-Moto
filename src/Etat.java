@@ -18,7 +18,7 @@ public class Etat {
     /** Route */
     Route route;
     /** Vitesse */
-    public float vitesse;
+    protected int vitesse;
     /** Score */
     int km;
     /** Pénalités obtenues lorsque la moto
@@ -39,10 +39,11 @@ public class Etat {
         this.km = 0;
         this.penalite = 0;
         this.timer = new Chrono();
+        this.vitesse = 80;
 
     }
 
-    public String testPerdu(){
+    /*public String testPerdu(){
         String tmp = new String();
         if (this.timer.chrono <= 0) {
             tmp = "Temps écoulé";
@@ -50,6 +51,10 @@ public class Etat {
         }
         if (gameOver) tmp = "Fin de partie";
         return "GAME OVER : " + tmp;
+    }*/
+    public boolean testPerdu(){
+
+        return this.timer.chrono <= 0 || this.vitesse <= 0;
     }
 
     /** ---Actualisation de la position de la moto lorsqu'elle se déplace...--- **/
@@ -80,7 +85,8 @@ public class Etat {
 
             if (dimO.intersects(pos) && o.isVisible()) { //Vérifie s les deux rectangle entre en collision
                 o.visible = false;
-                penalite += 10;
+                penalite += 250;
+                vitesse -= penalite/13;
             }
         }
     }
@@ -89,4 +95,8 @@ public class Etat {
 
     /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ETAT---*/
     public Point getPos() { return this.pos; }
+
+    public float getVitesse() {
+        return vitesse;
+    }
 }

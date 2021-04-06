@@ -106,17 +106,18 @@ public class Affichage extends JPanel {
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH / 4, 20);
         g.drawString(" Temps : " + this.etat.timer.chrono + " s", WIDTH - WIDTH / 4, 40);
-
+        g.drawString(" Vitesse : " + this.etat.getVitesse() + " km/h", 0, 20);
 
         try {
             vue.dessiner(g);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (this.etat.gameOver) {
+        if (this.etat.testPerdu()) {
+            g.clearRect(0,0,WIDTH,HEIGHT);
             //Affichage de l'écran de fin avec le score
-
-            g.drawString(etat.testPerdu(), WIDTH / 2, HEIGHT / 2);
+            g.setColor(Color.BLACK);
+            g.drawString("GAME OVER \n" + "Score : " + this.etat.km, WIDTH / 2, HEIGHT / 2);
         }
     }
 

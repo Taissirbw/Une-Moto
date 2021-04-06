@@ -29,7 +29,7 @@ public class Avancer extends Thread {
         /** Si la moto se trouve entre les deux bords de la route (sur la piste)*/
         if ((this.etat.getPos().x < affichage.getLigneRouteD().get(0).x) &&
                 this.etat.getPos().x > affichage.getLigneRouteG().get(0).x) {
-
+            if(this.etat.vitesse < vitesseMax) this.etat.vitesse+=2;
             return (vitesseMax * (480 / (this.etat.getPos().x + this.affichage.getLargeurMoto())));
         } else {
             /** Sinon, si la moto est sur le hors piste, la vitesse du thread qui la fait avancer diminue.*/
@@ -37,6 +37,8 @@ public class Avancer extends Thread {
             /** On calcule dans dist la distance entre la moto et la piste. Plus cette distance est
              * grande, plus la vitesse de la moto est pénalisée.*/
             int dist;
+            if(this.etat.vitesse > 0) this.etat.vitesse-=2;
+            else this.etat.vitesse = 0;
             if (this.etat.getPos().x > affichage.getLigneRouteD().get(0).x) {
                 /** Si la moto est à droite de la piste*/
                 dist = this.etat.getPos().x - affichage.getLigneRouteD().get(0).x;
@@ -55,15 +57,15 @@ public class Avancer extends Thread {
     /** ---- BOUCLE PRINCIPALE ---- **/
     @Override
     public void run(){
-        while (!etat.gameOver){
+        while (!etat.testPerdu()){
             /*On calcule la vitesse à laquelle le thread va s'executer. Celle-ci dépend
               de la position de la moto par rapport à la piste. On ajoute au résultat obtenu les pénalités,
               qui correspondent au ralentissement causé par une collision avec un obstacle.*/
             this.vitesse = calculVitesse() +  etat.penalite;
-            System.out.print("Vitesse : " + this.vitesse + " ");
+            //System.out.print("Vitesse : " + this.vitesse + " ");
             if (this.etat.km > 2000 && this.vitesse > this.vitesseMin) etat.gameOver = true;
 
-            if (etat.penalite > 0) etat.penalite --;
+            if (etat.penalite > 0) etat.penalite -=50;
             this.inGame = true;
             //mise a jour de la route
             this.etat.route.updateRoute();
@@ -94,6 +96,7 @@ public class Avancer extends Thread {
             }
             //Vérifie les collisions avec le décor, notamment pour détecter la collision avec un obstacle.
             this.etat.checkCollision();
+            System.out.println(this.etat.vitesse);
 
 
             try { Thread.sleep((long) vitesse);} //Pause thread
