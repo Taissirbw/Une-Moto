@@ -11,6 +11,7 @@ public class Avancer extends Thread {
     public float vitesseMin = 300;
     public float vitesseMax = 80;
     public float vitesse;
+    private int credit;
 
 
     /**
@@ -21,6 +22,7 @@ public class Avancer extends Thread {
         this.etat = etat;
         this.affichage = affichage;
         this.inGame = false;
+        this.credit = 6;
     }
 
     /** Calcul de la vitesse par rapport a la moitié de la fenetre**/
@@ -82,7 +84,13 @@ public class Avancer extends Thread {
             if(this.etat.km%(Affichage.getMove()*50) <= 0) this.etat.route.createCheckpoint();
             //le timer est crédité quand on passe un point de controle :
             if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&
-                    this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y) this.etat.timer.chrono += 2;
+                    this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y){
+                if (credit > 1){
+                    this.etat.timer.chrono += credit; //Un nombre de crédit est attribué aux timers
+                    credit--; //Le nombre de crédit attribué diminue en passant de plus en plus de points de controle
+                }else
+                    this.etat.timer.chrono += credit;
+            }
 
             /* Gestion du score : mise à jour des km parcourus*/
             this.etat.km += Affichage.getMove();

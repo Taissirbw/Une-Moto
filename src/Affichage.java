@@ -105,9 +105,13 @@ public class Affichage extends JPanel {
         //Affichage du score
         g.setFont(new Font("Verdana", Font.BOLD, 16));
         g.drawString(" Score : " + this.etat.km, WIDTH - WIDTH / 4, 20);
-        g.drawString(" Temps : " + this.etat.timer.chrono + " s", WIDTH - WIDTH / 4, 40);
-        g.drawString(" Vitesse : " + this.etat.getVitesse() + " km/h", 0, 20);
 
+        g.drawString(" Vitesse : " + this.etat.getVitesse() + " km/h", 0, 20);
+        if(this.etat.timer.chrono < 7) g.setColor(Color.RED);
+        g.drawString(" Temps : " + this.etat.timer.chrono + " s", WIDTH - WIDTH / 4, 40);
+        g.setColor(Color.WHITE);
+        if(this.etat.getVitesse() < 30) g.setColor(Color.RED);
+        g.drawString(" Vitesse : " + this.etat.getVitesse() + " km/h", 0, 20);
         try {
             vue.dessiner(g);
         } catch (IOException e) {
@@ -117,7 +121,8 @@ public class Affichage extends JPanel {
             g.clearRect(0,0,WIDTH,HEIGHT);
             //Affichage de l'écran de fin avec le score
             g.setColor(Color.BLACK);
-            g.drawString("GAME OVER \n" + "Score : " + this.etat.km, WIDTH / 2, HEIGHT / 2);
+            g.drawString("GAME OVER" , WIDTH / 2, HEIGHT / 2);
+            g.drawString("Score : " + this.etat.km, WIDTH / 2, HEIGHT / 2 + 50);
         }
     }
 

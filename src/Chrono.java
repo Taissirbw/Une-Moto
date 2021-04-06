@@ -1,6 +1,6 @@
 public class Chrono extends Thread {
 
-    int start = 5; //temps initial au lancement du jeu
+    int start = 8; //temps initial au lancement du jeu
     int chrono;
     public boolean arret = false; //Condition de lancement du thread
 
