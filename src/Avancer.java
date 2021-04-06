@@ -86,7 +86,7 @@ public class Avancer extends Thread {
             if(!this.etat.route.getCheckpoints().isEmpty() && this.etat.timer.isAlive() &&
                     this.etat.getPos().y < this.etat.route.getCheckpoints().get(0).y){
                 if (credit > 1){
-                    this.etat.timer.chrono += credit; //Un nombre de crédit est attribué aux timers
+                    this.etat.timer.chrono += credit; //Un nombre de crédit est attribué au chronometre
                     credit--; //Le nombre de crédit attribué diminue en passant de plus en plus de points de controle
                 }else
                     this.etat.timer.chrono += credit;
