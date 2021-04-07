@@ -8,66 +8,70 @@ import java.io.IOException;
  * */
 public class Etat {
 
-    /** Vitesse de la moto */
-    private float vitesse;
+    /** Etat de la partie */
+    boolean gameOver = false;
     /** Position de la moto */
     private Point pos = new Point();
-
+    /** Déplacement en cours de la moto */
+    public boolean left = false;
+    public boolean right = false;
     /** Route */
     Route route;
-
-    /** Animation de la route */
-    Avancer avancer;
-
+    /** Vitesse */
+    protected int vitesse;
     /** Score */
     int km;
-
-    /** Chrono */
+    /** Pénalités obtenues lorsque la moto
+     * entre en collision avec un obstacle.*/
+    float penalite;
+    /** Chronomètre */
     Chrono timer;
 
-
+    /**
+     * CONSTRUCTEUR DE LA CLASSE ETAT
+     *
+     * */
     public Etat() throws IOException {
         //Initialisation de la position de la voiture au début de la partie.
         pos.setLocation(Affichage.getWIDTH()/2 - Affichage.getLargeurMoto(),
                 Affichage.getHEIGHT() - Affichage.getHauteurMoto() - 20);
         this.route = new Route(); //création de la route
         this.km = 0;
+        this.penalite = 0;
         this.timer = new Chrono();
+        this.vitesse = 80;
 
     }
 
+    /*public String testPerdu(){
+        String tmp = new String();
+        if (this.timer.chrono <= 0) {
+            tmp = "Temps écoulé";
+            gameOver = true;
+        }
+        if (gameOver) tmp = "Fin de partie";
+        return "GAME OVER : " + tmp;
+    }*/
     public boolean testPerdu(){
-        return this.timer.chrono <= 0;
+
+        return this.timer.chrono <= 0 || this.vitesse <= 0;
     }
 
-    /*---Déplacement de la moto...---*/
-    /**Vers la gauche.*/
+    /** ---Actualisation de la position de la moto lorsqu'elle se déplace...--- **/
+    /** ...vers la gauche.*/
     public void moveLeft(){
         if(this.pos.x - Affichage.getMove() < 1) //On évite que la moto sorte du cadre à gauche
             this.pos.x = 1;
         else this.pos.x -= Affichage.getMove(); //La moto est deplacée à gauche.
     }
-    /**Vers la droite.*/
+
+    /** ...vers la droite.*/
     public void moveRight(){
         if((this.pos.x + Affichage.getLargeurMoto()) + Affichage.getMove() > Affichage.getWIDTH())
             this.pos.x = Affichage.getWIDTH() - Affichage.getLargeurMoto();
         else this.pos.x += Affichage.getMove();
     }
-    /**Vers le bas.*/
-    public void moveDown(){
-        if((this.pos.y + Affichage.getHauteurMoto()) + Affichage.getMove() > Affichage.getHEIGHT())
-            this.pos.y = Affichage.getHEIGHT() -  Affichage.getHauteurMoto();
-        else this.pos.y += Affichage.getMove();
-    }
-    /**Vers le haut.*/
-    public void moveUp(){
-        /*Pour donner une impression d'horizon, on permet au haut la moto d'aller légèrement plus
-        *haut que la ligne d'horizon, tant que le bas de l'image ne dépasse pas celle-ci.
-        * */
-        if((this.pos.y - Affichage.getMove()) < Affichage.getHorizon() - Affichage.getHauteurMoto()/2)
-            this.pos.y = Affichage.getHorizon() - Affichage.getHauteurMoto()/2;
-        else this.pos.y -= Affichage.getMove();
-    }
+
 
     /** Test la collision entre la moto et un élément du décor */
     public void checkCollision(){
@@ -79,15 +83,20 @@ public class Etat {
             //On stock une variable avec un rectangle représentant les dimensions de l'obstacle
             Rectangle dimO = o.getBorder();
 
-            if (dimO.intersects(pos)) //Vérifie s les deux rectangle entre en collision
+            if (dimO.intersects(pos) && o.isVisible()) { //Vérifie s les deux rectangle entre en collision
                 o.visible = false;
+                penalite += 250;
+                vitesse -= penalite/13;
+            }
         }
     }
 
 
 
     /**---METHODES D'ACCES AUX VARIABLES DE LA CLASSE ETAT---*/
-
-    public float getVitesse() { return this.vitesse; }
     public Point getPos() { return this.pos; }
+
+    public float getVitesse() {
+        return vitesse;
+    }
 }

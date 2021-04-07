@@ -18,10 +18,15 @@ public class Obstacle {
     /**Image*/
     private BufferedImage image;
 
+
+    /**
+     * CONSTRUCTEUR DE LA CLASSE OBSTACLE
+     *
+     * */
     public Obstacle(int x, int y) throws IOException {
         this.pos.setLocation(x,y);
         this.visible = true;
-        image = ImageIO.read(new File("Assets/moto0.png"));
+        image = ImageIO.read(new File("Assets/obstacle.png"));
         this.width = Affichage.getLargeurObstacle();
         this.height = Affichage.getHauteurObstacle();
     }
