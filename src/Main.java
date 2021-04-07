@@ -26,7 +26,7 @@ public class Main extends JPanel implements ActionListener {
         menu.setLocation(300,33);
 
         //Icone de la fenetre
-        ImageIcon img = new ImageIcon("Assets/moto0.png");
+        ImageIcon img = new ImageIcon("Assets/moto2.png");
         menu.setIconImage(img.getImage());
 
         //Image d'arriere-plan
