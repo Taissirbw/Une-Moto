@@ -1,9 +1,13 @@
 public class Chrono extends Thread {
 
-    int start = 20; //temps initial au lancement du jeu
+    int start = 8; //temps initial au lancement du jeu
     int chrono;
     public boolean arret = false; //Condition de lancement du thread
 
+    /**
+     * CONSTRUCTEUR DE LA CLASSE CHRONO
+     *
+     * */
     public Chrono(){
         this.chrono = start;
     }
@@ -11,7 +15,7 @@ public class Chrono extends Thread {
 
     @Override
     public void run(){
-        while (chrono >=0){ //boucle infinie
+        while (chrono >0){ //boucle infinie
             chrono -= 1;
             try { Thread.sleep(1000); } //Pause
             catch (Exception e) {
