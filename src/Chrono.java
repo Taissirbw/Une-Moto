@@ -1,3 +1,6 @@
+/** Classe Chrono: indique le temps restant  la moto
+ *  pour passer un point de controle
+ * */
 public class Chrono extends Thread {
 
     int start = 8; //temps initial au lancement du jeu

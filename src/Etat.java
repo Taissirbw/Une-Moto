@@ -3,7 +3,7 @@ import java.awt.*;
 import java.io.IOException;
 
 
-/** Classe Etat: definit l'état de l'interface, introduit une variable
+/** Classe Etat: definie l'état de l'interface, introduit une variable
  *  position qui indique la position courante de la moto.
  * */
 public class Etat {

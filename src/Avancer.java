@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.Random;
 
-/** Classe Avancer: gestion de l'avancée de l'ovale sur le parcours par le biais d'un thread
+/** Classe Avancer: gestion de l'avancée de la moto et l'actualisation de la route par le biais d'un thread
  * */
 public class Avancer extends Thread {
 

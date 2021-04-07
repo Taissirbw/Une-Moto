@@ -1,3 +1,6 @@
+/** Classe Oiseau: definie l'oiseau animé qui se déplace le long de
+ *  la fenetre
+ * */
 public class Oiseau extends Thread {
 
     /**délai entre chaque frame du gif*/

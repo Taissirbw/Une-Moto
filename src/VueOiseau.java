@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/** Classe VueOiseau: charge les frames d'un oiseau et lance son thread
+ * */
 public class VueOiseau {
 
     /** liste d'image a afficher*/
