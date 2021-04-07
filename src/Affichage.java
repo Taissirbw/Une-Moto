@@ -43,6 +43,7 @@ public class Affichage extends JPanel {
      */
     private BufferedImage decor;
     private BufferedImage route;
+    private BufferedImage gameOver;
     /**
      * Hauteur de la ligne d'horizon. Dépendant de la hauteur de la fenêtre.
      */
@@ -71,6 +72,7 @@ public class Affichage extends JPanel {
         moto = ImageIO.read(new File("Assets/moto1.png"));
         decor = ImageIO.read(new File("Assets/horizon2.png"));
         route = ImageIO.read(new File("Assets/planet2.png"));
+        gameOver = ImageIO.read(new File("Assets/gameOver.png"));
         ligneRoute = this.etat.route.getLigneRoute();
         ligneRouteD = this.etat.route.getLigneRouteD();
         ligneRouteG = this.etat.route.getLigneRouteG();
@@ -119,8 +121,9 @@ public class Affichage extends JPanel {
         }
         if (this.etat.testPerdu()) {
             g.clearRect(0,0,WIDTH,HEIGHT);
+            g.drawImage(gameOver, 0, 0, WIDTH, HEIGHT, null);
             //Affichage de l'écran de fin avec le score
-            g.setColor(Color.BLACK);
+            g.setColor(Color.WHITE);
             g.drawString("GAME OVER" , WIDTH / 2, HEIGHT / 2);
             g.drawString("Score : " + this.etat.km, WIDTH / 2, HEIGHT / 2 + 50);
         }
